@@ -1,0 +1,138 @@
+/* ==========================================================================
+   FORUM ASN INKLUSIF - MAIN STYLESHEET
+   Standard: WCAG 2.1 AA | Features: Dark Mode, Focus Visible
+   ========================================================================== */
+
+/* 1. CSS VARIABLES (THEME CONFIG) */
+:root {
+    /* --- LIGHT MODE (DEFAULT - BIRU ASN) --- */
+    --header-bg: #002b5c;        /* Navy Blue Gelap (Sesuai Logo) */
+    --header-text: #ffffff;      /* Teks Putih */
+    --primary-color: #002b5c;    /* Judul Utama */
+    --accent-color: #007acc;     /* Link & Tombol (Biru Terang Logo) */
+    --bg-color: #ffffff;         /* Background Putih */
+    --text-color: #222222;       /* Teks Hitam Pekat (Bukan abu, agar kontras) */
+    --card-bg: #f4f6f8;          /* Background Kartu (Abu sangat muda) */
+    --border-color: #dde1e6;     /* Garis Batas */
+    --button-text: #ffffff;      
+}
+
+[data-theme="dark"] {
+    /* --- DARK MODE (HIGH CONTRAST) --- */
+    --header-bg: #000000;        /* Hitam Total */
+    --header-text: #ffffff;
+    --primary-color: #ffffff;    /* Judul Putih */
+    --accent-color: #4db8ff;     /* Cyan Terang (Agar terbaca di hitam) */
+    --bg-color: #121212;         /* Abu Gelap (Mencegah mata lelah) */
+    --text-color: #e0e0e0;       /* Teks Putih Gading */
+    --card-bg: #1e1e1e;          
+    --border-color: #333333;
+    --button-text: #000000;      /* Teks tombol hitam agar kontras dgn Cyan */
+}
+
+/* 2. BASE STYLES */
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1.1rem; /* Ukuran font sedikit diperbesar untuk aksesibilitas */
+}
+
+a { color: var(--accent-color); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+a:focus { 
+    outline: 3px solid var(--accent-color); 
+    outline-offset: 2px; 
+    background-color: var(--bg-color); /* Memastikan fokus terlihat jelas */
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--primary-color); margin-top: 1.5em; }
+
+/* Skip Link (Hidden until focused) */
+.skip-link {
+    position: absolute;
+    top: -50px; left: 0;
+    background: var(--accent-color);
+    color: var(--button-text);
+    padding: 10px 15px;
+    z-index: 9999;
+    font-weight: bold;
+    transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* 3. HEADER & NAV */
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 0;
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.brand-wrapper { display: flex; align-items: center; gap: 15px; }
+.brand-wrapper img {
+    background: white; /* Kotak putih di belakang logo agar selalu kontras */
+    padding: 4px;
+    border-radius: 50%; /* Lingkaran */
+    width: 60px; height: 60px; object-fit: contain;
+}
+.brand-title h1 { margin: 0; font-size: 1.3rem; color: #fff; }
+.brand-subtitle { display: block; font-size: 0.9rem; opacity: 0.9; color: #ddd; }
+
+/* Menu */
+nav ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; gap: 20px; flex-wrap: wrap;
+}
+nav a { color: #fff; font-weight: 500; }
+nav a.active { text-decoration: underline; color: #ffeb3b; /* Kuning Emas */ }
+
+/* Tombol Tools (Dark Mode/Lang) */
+.nav-controls { display: flex; gap: 10px; align-items: center; }
+#theme-toggle, #lang-toggle {
+    background: transparent; border: 1px solid #fff; color: #fff;
+    padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold;
+}
+#theme-toggle:hover, #lang-toggle:hover { background: rgba(255,255,255,0.2); }
+
+/* 4. CONTENT & FOOTER */
+.hero {
+    text-align: center; padding: 3rem 1rem;
+    background: var(--card-bg); border-radius: 8px; margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.button-cta {
+    display: inline-block; background: var(--accent-color);
+    color: var(--button-text); padding: 12px 24px;
+    border-radius: 50px; font-weight: bold; margin-top: 10px;
+}
+
+footer {
+    background: var(--header-bg); color: #fff;
+    padding: 3rem 0; margin-top: 4rem; text-align: center;
+}
+footer a { color: #4db8ff; }
+
+/* Utility */
+.visually-hidden { display: none !important; }
