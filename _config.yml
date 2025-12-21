@@ -1,0 +1,42 @@
+# =============================================================
+# KONFIGURASI SITUS FORUM ASN INKLUSIF
+# =============================================================
+
+title: "Forum ASN Inklusif"
+email: contact@asninklusif.or.id
+description: >- # Deskripsi ini akan muncul di Google Search
+  Wadah sinergi, advokasi, dan pengembangan kapasitas Aparatur Sipil Negara (ASN) 
+  penyandang disabilitas dan non-disabilitas untuk mewujudkan birokrasi Indonesia yang inklusif.
+baseurl: "" 
+url: "https://www.asninklusif.or.id" 
+
+# --- PENGATURAN PENULIS (DEFAULT) ---
+author:
+  name: "Tim Redaksi ASN Inklusif"
+  email: "contact@asninklusif.or.id"
+
+# --- PENGATURAN BUILD ---
+markdown: kramdown
+theme: minima # Kita pakai tema dasar yang sangat ringan, nanti kita tumpuk dengan CSS kita sendiri
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap # Otomatis membuat sitemap.xml untuk Google
+
+# --- NAVIGASI HEADER (Menu Utama) ---
+# Urutan menu ini akan muncul di bagian atas website
+header_pages:
+  - index.md
+  - about.md
+  - program.md
+  - library.md
+  - join.md
+
+# --- SOCIAL MEDIA (Untuk Footer) ---
+twitter_username: asninklusif # Nanti kita ubah logonya jadi X atau sesuaikan
+instagram_username: asninklusif.id
+github_username:  asninklusif
+
+# --- AKSESIBILITAS & LOKALISASI ---
+lang: id
+timezone: Asia/Jakarta
