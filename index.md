@@ -4,7 +4,7 @@ title: "Beranda"
 ---
 
 <div class="hero">
-  <img src="{{ "/assets/img/logo.jpg" | relative_url }}" alt="Logo ASN Inklusif" style="width: 120px; height: auto; border-radius: 50%; margin-bottom: 20px; border: 4px solid #002b5c;">
+  <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="Logo ASN Inklusif" style="width: 120px; height: auto; border-radius: 50%; margin-bottom: 20px; border: 4px solid #002b5c;">
   
   <h1 style="margin-top: 0; font-size: 2.5em;">Sinergi Indonesia Inklusif</h1>
   
