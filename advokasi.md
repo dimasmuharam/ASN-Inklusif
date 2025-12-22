@@ -17,7 +17,7 @@ Silakan isi formulir di bawah ini dengan kronologi yang lengkap agar tim Advokas
 
 <div style="margin-top: 30px; text-align: center;">
   
-  PASTE_KODE_GOOGLE_FORM_DISINI
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScsQPMzeTStYOJPJ_X1UUOeDxLpv9dJvrw3hCFd-TxC3bOfBQ/viewform?embedded=true" width="640" height="1200" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
 
 </div>
 
