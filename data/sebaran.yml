@@ -1,0 +1,40 @@
+# FILE: _data/sebaran.yml
+
+# 1. STATISTIK UMUM
+statistik:
+  total_anggota: 350
+  total_instansi: 42
+  total_provinsi: 38
+
+# 2. RAGAM NASIONAL
+ragam_nasional:
+  - { jenis: "Netra", jumlah: 120, warna: "#448aff" }
+  - { jenis: "Fisik", jumlah: 90, warna: "#ff5252" }
+  - { jenis: "Rungu/Wicara", jumlah: 60, warna: "#00e676" }
+  - { jenis: "Non-Disabilitas (Ally)", jumlah: 50, warna: "#607d8b" }
+  - { jenis: "Mental", jumlah: 20, warna: "#e040fb" }
+  - { jenis: "Intelektual", jumlah: 5, warna: "#ffd740" }
+  - { jenis: "Ganda", jumlah: 5, warna: "#ffab40" }
+
+# 3. DATA INSTANSI (ACAK SAJA, TIDAK PERLU DIURUTKAN)
+# Sistem akan otomatis mengambil Top 5 tertinggi
+data_instansi:
+  - { nama: "Kemenkeu", jumlah: 45 }
+  - { nama: "Pemprov Jabar", jumlah: 35 }
+  - { nama: "Kemenag", jumlah: 25 }
+  - { nama: "Pemprov DKI Jakarta", jumlah: 55 }  # Paling banyak, taruh acak ga masalah
+  - { nama: "Kemensos", jumlah: 30 }
+  - { nama: "Kemendikbud", jumlah: 15 }
+  - { nama: "Pemkot Surabaya", jumlah: 10 }
+  - { nama: "Kemenhub", jumlah: 5 }
+
+# 4. DATA PROVINSI
+provinsi:
+  - { nama: "Aceh", id_peta: "aceh", jumlah: 8 }
+  - { nama: "Sumatera Utara", id_peta: "sumut", jumlah: 12 }
+  - { nama: "DKI Jakarta", id_peta: "jakarta", jumlah: 80 }
+  - { nama: "Jawa Barat", id_peta: "jabar", jumlah: 60 }
+  - { nama: "Jawa Tengah", id_peta: "jateng", jumlah: 45 }
+  - { nama: "Jawa Timur", id_peta: "jatim", jumlah: 50 }
+  - { nama: "Bali", id_peta: "bali", jumlah: 10 }
+  # ... (dan seterusnya, data provinsi sama seperti sebelumnya)
