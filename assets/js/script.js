@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Cek memori terakhir pengguna
     if (currentTheme) {
         updateTheme(currentTheme);
     }
@@ -30,7 +29,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. LOGIKA GANTI BAHASA (GOOGLE COOKIE TRICK) ---
+    // --- 2. LOGIKA TEXT RESIZER (A+ / A-) ---
+    const btnUp = document.getElementById('font-up');
+    const btnDown = document.getElementById('font-down');
+    let currentSize = parseFloat(localStorage.getItem('fontSize')) || 100; // Default 100%
+
+    function setFontSize(size) {
+        document.body.style.fontSize = size + '%';
+        localStorage.setItem('fontSize', size);
+    }
+
+    // Set ukuran awal dari memori
+    setFontSize(currentSize);
+
+    if (btnUp && btnDown) {
+        btnUp.addEventListener('click', () => {
+            if (currentSize < 150) { // Maksimal 150%
+                currentSize += 10;
+                setFontSize(currentSize);
+            }
+        });
+
+        btnDown.addEventListener('click', () => {
+            if (currentSize > 80) { // Minimal 80%
+                currentSize -= 10;
+                setFontSize(currentSize);
+            }
+        });
+    }
+
+    // --- 3. LOGIKA BAHASA ---
     const langToggle = document.getElementById('lang-toggle');
     
     function getCookie(name) {
@@ -45,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (langToggle) {
-        // Cek status bahasa saat ini
         const currentLang = getCookie('googtrans');
         if (currentLang && currentLang.includes('/en')) {
             langToggle.textContent = 'EN';
@@ -56,16 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
         langToggle.addEventListener('click', () => {
             const current = getCookie('googtrans');
             if (current && current.includes('/en')) {
-                setGoogleCookie('/id/id'); // Balik ke Indo
+                setGoogleCookie('/id/id'); 
             } else {
-                setGoogleCookie('/id/en'); // Ganti ke Inggris
+                setGoogleCookie('/id/en'); 
             }
-            location.reload(); // Reload halaman untuk memproses
+            location.reload(); 
         });
     }
 });
 
-// --- 3. GOOGLE TRANSLATE ENGINE ---
+// --- 4. GOOGLE TRANSLATE ENGINE ---
 window.googleTranslateElementInit = function() {
     new google.translate.TranslateElement({
         pageLanguage: 'id',
