@@ -23,7 +23,41 @@ title: "Beranda"
   </div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
+<div class="stat-banner-home">
+  <div class="sb-item">
+    <span class="sb-num">{{ site.data.sebaran.statistik.total_anggota }}</span>
+    <span class="sb-label">Anggota</span>
+  </div>
+  <div class="sb-item">
+    <span class="sb-num">{{ site.data.sebaran.statistik.total_instansi }}</span>
+    <span class="sb-label">Instansi</span>
+  </div>
+  <div class="sb-item">
+    <span class="sb-num">{{ site.data.sebaran.statistik.total_provinsi }}</span>
+    <span class="sb-label">Provinsi</span>
+  </div>
+  <div class="sb-action">
+    <a href="{{ "/peta/" | relative_url }}" style="font-weight: bold; text-decoration: none; color: var(--primary-color); border-bottom: 2px solid var(--accent-color);">
+      Lihat Peta Sebaran →
+    </a>
+  </div>
+</div>
+
+<style>
+.stat-banner-home {
+  display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap;
+  padding: 25px; margin-bottom: 50px; margin-top: 30px;
+  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.sb-item { text-align: center; min-width: 100px; }
+.sb-num { display: block; font-size: 2em; font-weight: 800; color: var(--primary-color); line-height: 1; margin-bottom: 5px; }
+.sb-label { font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+body.dark-mode .sb-num { color: var(--highlight); }
+body.dark-mode .sb-action a { color: var(--text-color) !important; }
+</style>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 0;">
 
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 4px solid var(--highlight);">
     <h2 style="margin-top: 0;">🛠️ Inklusi-Meter</h2>
