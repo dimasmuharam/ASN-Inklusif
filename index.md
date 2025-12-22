@@ -52,6 +52,25 @@ title: "Beranda"
 
 </div>
 
+<div style="background-color: #002b5c; color: #ffffff; padding: 35px 30px; border-radius: 8px; margin-top: 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-left: 6px solid #00b4d8; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+  
+  <div style="flex: 1; min-width: 300px;">
+    <h3 style="color: #ffffff; margin-top: 0; margin-bottom: 10px; font-size: 1.5em; text-transform: uppercase; letter-spacing: 1px;">
+      Gerakan Nasional ASN Inklusif
+    </h3>
+    <p style="font-size: 1.05em; opacity: 0.95; margin: 0; line-height: 1.5;">
+      Turut serta dalam mengkampanyekan birokrasi yang ramah disabilitas. Unduh bingkai foto resmi (Twibbon) sebagai bentuk dukungan moral profesi.
+    </p>
+  </div>
+
+  <div>
+    <a href="{{ "/kampanye/" | relative_url }}" class="button-cta" style="background: #ffffff; color: #002b5c; border: none; font-weight: bold; padding: 12px 25px; font-size: 1em; text-decoration: none;">
+      📸 Pasang Bingkai
+    </a>
+  </div>
+
+</div>
+
 <div id="berita" style="margin-top: 60px; border-top: 1px solid var(--border-color); padding-top: 40px;">
   <h2>Berita & Kegiatan Terbaru</h2>
 
