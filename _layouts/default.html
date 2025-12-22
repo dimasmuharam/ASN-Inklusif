@@ -14,7 +14,7 @@
     
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
 
-    </head>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
@@ -25,6 +25,7 @@
                 <a href="{{ "/" | relative_url }}" title="Kembali ke Beranda Forum ASN Inklusif">
                     <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="Logo Forum ASN Inklusif: Lingkaran biru dengan ikon ragam disabilitas" width="60" height="auto">
                 </a>
+                
                 <div>
                     <a href="{{ "/" | relative_url }}" class="brand-title">
                         <h1>{{ site.title }}</h1>
@@ -59,16 +60,26 @@
     <footer>
         <div class="container">
             <p>&copy; {{ site.time | date: '%Y' }} <strong>{{ site.title }}</strong>. All Rights Reserved.</p>
-            <p class="eng-name">Indonesian Inclusive Civil Servants Association</p>
+            <p class="eng-name" style="font-style: italic; margin-bottom: 20px;">Indonesian Inclusive Civil Servants Association</p>
             
-            <div class="footer-links">
+            <div class="footer-links" style="margin-bottom: 25px;">
                 <a href="mailto:{{ site.email }}" aria-label="Kirim Email ke Kami">📩 {{ site.email }}</a> | 
                 <a href="https://instagram.com/{{ site.instagram_username }}" target="_blank" rel="noopener">📸 @{{ site.instagram_username }}</a>
             </div>
 
-            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">
-                Website dikembangkan dengan standar aksesibilitas WCAG 2.1 Level AA.
-            </p>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px auto; width: 80%;">
+
+            <div style="font-size: 0.85rem; opacity: 0.9; line-height: 1.6;">
+                <p style="margin: 5px 0;">
+                    Website ini dikembangkan dengan standar aksesibilitas <strong>WCAG 2.1 Level AA</strong>.
+                </p>
+                <p style="margin: 5px 0;">
+                    Accessibility Audit & Tech Partner: 
+                    <a href="https://disabilitas.com" target="_blank" rel="noopener" style="color: #4db8ff; font-weight: bold; text-decoration: none;">Disabilitas.com</a> 
+                    & 
+                    <a href="https://dimaster.co.id" target="_blank" rel="noopener" style="color: #4db8ff; font-weight: bold; text-decoration: none;">Dimaster Group</a>
+                </p>
+            </div>
         </div>
     </footer>
 
