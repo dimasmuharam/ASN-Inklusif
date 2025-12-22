@@ -4,40 +4,50 @@ title: "Beranda"
 ---
 
 <div class="hero">
-  <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="Logo ASN Inklusif" style="width: 120px; height: auto; border-radius: 50%; margin-bottom: 20px; border: 4px solid #002b5c;">
+  <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="Logo ASN Inklusif" style="width: 120px; height: auto; border-radius: 50%; margin-bottom: 20px; border: 4px solid var(--primary-color); background: #fff; padding: 5px;">
   
   <h1 style="margin-top: 0; font-size: 2.5em;">Sinergi Indonesia Inklusif</h1>
   
-  <p style="font-size: 1.2em; max-width: 800px; margin: 10px auto;">
+  <p style="font-size: 1.2em; max-width: 800px; margin: 10px auto; opacity: 0.9;">
     Wadah kolaborasi Aparatur Sipil Negara (ASN) penyandang disabilitas dan non-disabilitas untuk mewujudkan birokrasi yang setara, profesional, dan berdaya saing.
   </p>
   
-  <div style="margin-top: 30px;">
-    <a href="https://bit.ly/asninklusif" class="button-cta" aria-label="Isi formulir pendaftaran anggota">
-      🚀 Gabung Anggota Sekarang
+  <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+    <a href="{{ "/join/" | relative_url }}" class="button-cta">
+      🚀 Gabung Anggota
+    </a>
+
+    <a href="{{ "/tool/asesmen/" | relative_url }}" class="button-cta" style="background: transparent; border: 2px solid var(--accent-color); color: var(--text-color);">
+      📊 Cek Skor Inklusivitas
     </a>
   </div>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
-<div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
+
+  <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 4px solid var(--highlight);">
+    <h2 style="margin-top: 0;">🛠️ Inklusi-Meter</h2>
+    <p>Ukur kesiapan unit kerja Anda menjadi kantor ramah disabilitas. Asesmen mandiri berbasis standar internasional (ILO & ISO).</p>
+    <a href="{{ "/tool/asesmen/" | relative_url }}" style="font-weight: bold;">Mulai Audit Sekarang →</a>
+  </div>
+
+  <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
     <h2 style="margin-top: 0;">
         <a href="{{ "/advokasi/" | relative_url }}" style="text-decoration: none; color: inherit;">
             📢 Advokasi Kebijakan
         </a>
     </h2>
     <p>Kami mengawal regulasi manajemen ASN. Mengalami kendala di kantor? <a href="{{ "/advokasi/" | relative_url }}">Laporkan di sini.</a></p>
-</div>
+  </div>
   
-
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
     <h2 style="margin-top: 0;">🤝 Jejaring & Sinergi</h2>
-    <p>Menghubungkan lebih dari 200 ASN dari berbagai Kementerian, Lembaga, dan Pemerintah Daerah untuk saling berbagi pengalaman dan penguatan.</p>
+    <p>Menghubungkan lebih dari 200 ASN dari berbagai Kementerian, Lembaga, dan Pemerintah Daerah untuk saling berbagi pengalaman.</p>
   </div>
 
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
     <h2 style="margin-top: 0;">📚 Pengembangan Diri</h2>
-    <p>Menyelenggarakan webinar, pelatihan, dan pendampingan agar ASN disabilitas dapat bekerja optimal dan berkontribusi maksimal bagi bangsa.</p>
+    <p>Menyelenggarakan webinar, pelatihan, dan pendampingan agar ASN disabilitas dapat bekerja optimal dan berkontribusi maksimal.</p>
   </div>
 
 </div>
@@ -105,4 +115,5 @@ title: "Beranda"
   </div>
   {% endif %}
 
-  {% endif %} </div>
+  {% endif %} 
+</div>
