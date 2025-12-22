@@ -20,11 +20,15 @@ title: "Beranda"
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
-
-  <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
-    <h2 style="margin-top: 0;">📢 Advokasi Kebijakan</h2>
-    <p>Kami mengawal regulasi manajemen ASN agar berbasis meritokrasi dan mengakomodasi kebutuhan penyandang disabilitas, mulai dari rekrutmen hingga pengembangan karier.</p>
-  </div>
+<div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
+    <h2 style="margin-top: 0;">
+        <a href="{{ "/advokasi/" | relative_url }}" style="text-decoration: none; color: inherit;">
+            📢 Advokasi Kebijakan
+        </a>
+    </h2>
+    <p>Kami mengawal regulasi manajemen ASN. Mengalami kendala di kantor? <a href="{{ "/advokasi/" | relative_url }}">Laporkan di sini.</a></p>
+</div>
+  
 
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
     <h2 style="margin-top: 0;">🤝 Jejaring & Sinergi</h2>
