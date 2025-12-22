@@ -15,16 +15,21 @@ author:
   name: "Tim Redaksi ASN Inklusif"
   email: "contact@asninklusif.or.id"
 
-# --- PENGATURAN BUILD ---
+# --- PENGATURAN BUILD & PAGINATION ---
 markdown: kramdown
-theme: minima # Kita pakai tema dasar yang sangat ringan, nanti kita tumpuk dengan CSS kita sendiri
+theme: minima 
+
+# Pengaturan Halaman (Pagination)
+paginate: 5                  # Menampilkan 5 artikel per halaman
+paginate_path: "/page:num/"  # Link halaman berikutnya akan jadi /page2/, /page3/ dst
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sitemap # Otomatis membuat sitemap.xml untuk Google
+  - jekyll-sitemap 
+  - jekyll-paginate          # <--- Plugin Wajib untuk Pagination
 
 # --- NAVIGASI HEADER (Menu Utama) ---
-# Urutan menu ini akan muncul di bagian atas website
 header_pages:
   - index.md
   - about.md
@@ -33,7 +38,7 @@ header_pages:
   - join.md
 
 # --- SOCIAL MEDIA (Untuk Footer) ---
-twitter_username: asninklusif # Nanti kita ubah logonya jadi X atau sesuaikan
+twitter_username: asninklusif 
 instagram_username: asninklusif.id
 github_username:  asninklusif
 
