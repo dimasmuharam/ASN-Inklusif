@@ -24,18 +24,22 @@ permalink: /kampanye/
   <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center;">
     
     <div style="margin-bottom: 20px;">
-      <label for="imageInput" class="button-cta" style="cursor: pointer; display: inline-block; padding: 15px 30px; background: #002b5c; color: white; border-radius: 8px; font-weight: bold; transition: 0.3s;" tabindex="0" onkeydown="if(event.key === 'Enter') document.getElementById('imageInput').click()">
+      <input type="file" id="imageInput" accept="image/png, image/jpeg, image/jpg" style="display: none;" aria-hidden="true">
+
+      <button id="triggerBtn" class="button-cta" style="cursor: pointer; display: inline-block; padding: 15px 30px; background: #002b5c; color: white; border-radius: 8px; font-weight: bold; transition: 0.3s; border: none; font-size: 1.1em;">
         📸 Pilih Foto Terbaik Anda
-        <input type="file" id="imageInput" accept="image/png, image/jpeg, image/jpg" style="display: none;" aria-describedby="fileName">
-      </label>
-      <p id="fileName" style="font-size: 0.9em; color: #666; margin-top: 10px;" aria-live="polite">Belum ada foto yang dipilih. Format: JPG/PNG.</p>
+      </button>
+
+      <p id="fileName" style="font-size: 0.9em; color: #666; margin-top: 15px;" aria-live="polite">
+        Belum ada foto yang dipilih. Format: JPG/PNG.
+      </p>
     </div>
 
     <div id="canvasContainer" style="display: none; margin: 30px auto; max-width: 500px; border: 2px dashed var(--border-color); padding: 5px;">
         <canvas id="twibbonCanvas" width="1080" height="1080" style="width: 100%; height: auto; display: block;" role="img" aria-label="Pratinjau foto Anda yang telah digabungkan dengan bingkai kampanye ASN Inklusif"></canvas>
     </div>
     
-    <p id="loadingText" style="display:none; color: var(--accent-color); font-weight:bold; margin-top: 20px;" role="status" aria-live="polite">
+    <p id="loadingText" style="display:none; color: var(--accent-color); font-weight:bold; margin-top: 20px;" role="status" aria-live="assertive">
       <span class="loader-icon">⚙️</span> Sedang memproses foto... Mohon tunggu.
     </p>
 
@@ -113,13 +117,14 @@ permalink: /kampanye/
 .faq-content { padding: 0 15px 15px 15px; border-top: 1px solid var(--border-color); padding-top: 10px; }
 .faq-content p { margin: 0; font-size: 0.95em; color: var(--text-color); opacity: 0.9; }
 
-/* Focus Style */
+/* Focus Style yang Jelas */
 *:focus { outline: 3px solid #ffc107; outline-offset: 2px; }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const imageInput = document.getElementById('imageInput');
+    const triggerBtn = document.getElementById('triggerBtn'); // Tombol Baru
     const fileNameDisplay = document.getElementById('fileName');
     const canvas = document.getElementById('twibbonCanvas');
     const ctx = canvas.getContext('2d');
@@ -129,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const actionArea = document.getElementById('actionArea');
     const loadingText = document.getElementById('loadingText');
 
-    // URL Frame Twibbon (Update path ini sesuai file asli)
+    // URL Assets
     const frameURL = '{{ "/assets/img/twibbon-frame.png" | relative_url }}?v=' + new Date().getTime();
-    const logoURL = '{{ "/assets/img/logo.png" | relative_url }}'; // Untuk fallback
+    const logoURL = '{{ "/assets/img/logo.png" | relative_url }}';
 
     let userImage = new Image();
     let frameImage = new Image();
@@ -140,16 +145,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load Frame
     frameImage.crossOrigin = "anonymous";
     frameImage.src = frameURL;
-    
-    frameImage.onload = function() { 
-        isFrameLoaded = true; 
-        console.log("Frame loaded successfully");
-    };
-    
-    frameImage.onerror = function() { 
-        console.warn("Gagal memuat bingkai Twibbon. Menggunakan mode Fallback (Bingkai Manual).");
-        isFrameLoaded = false; 
-    };
+    frameImage.onload = function() { isFrameLoaded = true; console.log("Frame loaded"); };
+    frameImage.onerror = function() { console.warn("Frame failed, use fallback"); isFrameLoaded = false; };
+
+    // --- LOGIKA TOMBOL AKSESIBEL ---
+    // Saat tombol "Pilih Foto" ditekan, dia akan menekan input file yang tersembunyi
+    triggerBtn.addEventListener('click', function() {
+        imageInput.click();
+    });
 
     // Saat Upload Foto
     imageInput.addEventListener('change', function(e) {
@@ -169,12 +172,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     canvasContainer.style.display = 'block';
                     actionArea.style.display = 'block';
                     
-                    // Cek fitur Web Share API
                     if (navigator.canShare && navigator.share) {
                         shareBtn.style.display = 'inline-block';
                     }
-                    
-                    // Fokus ke tombol download agar user langsung tahu
+                    // Pindahkan fokus ke tombol download agar pembaca layar langsung tahu langkah selanjutnya
                     downloadBtn.focus();
                 };
                 userImage.src = event.target.result;
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawTwibbon() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // 1. Gambar Foto User (Crop Center)
+        // 1. Gambar Foto User (Center Crop)
         const canvasRatio = canvas.width / canvas.height;
         const imageRatio = userImage.width / userImage.height;
         let drawWidth, drawHeight, startX, startY;
@@ -204,29 +205,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         ctx.drawImage(userImage, startX, startY, drawWidth, drawHeight);
 
-        // 2. Gambar Frame
+        // 2. Gambar Frame (atau Fallback)
         if (isFrameLoaded) {
             ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
         } else {
-            // FALLBACK JIKA FRAME GAGAL LOAD (Buat Bingkai Manual)
             drawFallbackFrame();
         }
     }
 
     function drawFallbackFrame() {
-        // Bingkai bawah Gradient Biru
         const gradient = ctx.createLinearGradient(0, canvas.height - 300, 0, canvas.height);
         gradient.addColorStop(0, "rgba(0, 43, 92, 0)");
         gradient.addColorStop(1, "rgba(0, 43, 92, 0.9)");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, canvas.height - 400, canvas.width, 400);
 
-        // Border Emas
         ctx.lineWidth = 20;
         ctx.strokeStyle = "#ffd700";
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-        // Teks Kampanye
         ctx.fillStyle = "#ffffff";
         ctx.font = "bold 60px Arial";
         ctx.textAlign = "center";
@@ -236,12 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = "#ffd700";
         ctx.fillText("#ASNInklusif", canvas.width / 2, canvas.height - 80);
 
-        // Coba gambar logo kecil di pojok
         const logoImg = new Image();
         logoImg.src = logoURL;
-        logoImg.onload = function() {
-            ctx.drawImage(logoImg, 40, 40, 150, 150);
-        }
+        logoImg.onload = function() { ctx.drawImage(logoImg, 40, 40, 150, 150); }
     }
 
     // Share Logic
@@ -256,9 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         text: 'Saya mendukung #ASNInklusif! Buat twibbonmu di sini: ' + window.location.href
                     });
                 } catch (err) { console.log('Share canceled'); }
-            } else {
-                alert('Gunakan tombol Download.');
-            }
+            } else { alert('Gunakan tombol Download.'); }
         });
     });
 
