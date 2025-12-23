@@ -32,8 +32,8 @@ permalink: /peta/
   body.dark-mode .map-box { background: #1a1a1a; }
   
   /* Interaksi SVG */
-  .province-shape { fill: #d1d5db; stroke: #ffffff; stroke-width: 0.5; cursor: pointer; transition: all 0.3s; }
-  .province-shape:hover { stroke: #ffd700; stroke-width: 1.5; filter: brightness(1.1); transform: scale(1.005); transform-origin: center; }
+  .province-shape { fill: #d1d5db; stroke: #ffffff; stroke-width: 1; cursor: pointer; transition: all 0.3s; }
+  .province-shape:hover { fill: #1e3a8a !important; stroke: #ffd700; stroke-width: 2; filter: brightness(1.1); transform: scale(1.01); transform-origin: center; }
   
   /* Tooltip */
   #tooltip { position: fixed; display: none; background: rgba(0, 43, 92, 0.95); color: #fff; padding: 10px 15px; border-radius: 6px; font-size: 0.9em; pointer-events: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -90,51 +90,32 @@ permalink: /peta/
         <span style="font-size: 1.5em; font-weight: bold;" id="tt-jml">0</span> Anggota
       </div>
 
-      <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 500px;" aria-hidden="true">
-        <title>Peta Indonesia</title>
+      <svg viewBox="0 0 800 300" class="map-svg" aria-label="Peta Interaktif Sebaran ASN Inklusif">
         
-        <path id="aceh" class="province-shape" data-name="Aceh" d="M30,50 L50,40 L60,60 L40,80 Z" />
-        <path id="sumut" class="province-shape" data-name="Sumatera Utara" d="M60,60 L80,70 L90,100 L50,90 Z" />
-        <path id="sumbar" class="province-shape" data-name="Sumatera Barat" d="M50,90 L70,100 L80,130 L60,120 Z" />
-        <path id="riau" class="province-shape" data-name="Riau" d="M70,100 L110,90 L120,120 L80,130 Z" />
-        <path id="kepri" class="province-shape" data-name="Kep. Riau" d="M120,80 L140,80 L145,90 L125,90 Z" /> <path id="jambi" class="province-shape" data-name="Jambi" d="M80,130 L120,120 L130,140 L90,150 Z" />
-        <path id="bengkulu" class="province-shape" data-name="Bengkulu" d="M80,140 L90,150 L100,180 L85,170 Z" />
-        <path id="sumsel" class="province-shape" data-name="Sumatera Selatan" d="M90,150 L130,140 L140,170 L100,180 Z" />
-        <path id="babel" class="province-shape" data-name="Bangka Belitung" d="M150,140 L170,145 L165,165 L145,160 Z" />
-        <path id="lampung" class="province-shape" data-name="Lampung" d="M100,180 L140,170 L145,195 L110,200 Z" />
+        <path id="aceh" class="province-shape" d="M30,40 L60,50 L50,70 L20,60 Z" data-name="Aceh" tabindex="0"></path>
+        <path id="sumut" class="province-shape" d="M50,70 L70,80 L80,110 L40,90 Z" data-name="Sumatera Utara" tabindex="0"></path>
+        <path id="sumbar" class="province-shape" d="M40,90 L80,110 L100,160 L50,140 Z" data-name="Sumatera Barat & Lainnya" tabindex="0"></path>
 
-        <path id="banten" class="province-shape" data-name="Banten" d="M150,210 L170,205 L175,225 L155,230 Z" />
-        <path id="jakarta" class="province-shape" data-name="DKI Jakarta" d="M175,205 L185,205 L185,215 L175,215 Z" /> <path id="jabar" class="province-shape" data-name="Jawa Barat" d="M175,215 L210,210 L215,235 L175,235 Z" />
-        <path id="jateng" class="province-shape" data-name="Jawa Tengah" d="M215,210 L250,210 L250,240 L220,240 Z" />
-        <path id="diy" class="province-shape" data-name="DI Yogyakarta" d="M235,240 L250,240 L245,250 L235,245 Z" />
-        <path id="jatim" class="province-shape" data-name="Jawa Timur" d="M250,215 L290,215 L300,245 L255,245 Z" />
+        <path id="kaltim" class="province-shape" d="M230,90 L270,80 L280,140 L240,140 Z" data-name="Kalimantan Timur (IKN)" tabindex="0"></path>
+        <path class="province-shape" d="M180,100 L230,90 L240,140 L200,160 L170,140 Z" data-name="Kalimantan Lainnya" tabindex="0"></path>
 
-        <path id="bali" class="province-shape" data-name="Bali" d="M305,235 L320,230 L315,245 L305,240 Z" />
-        <path id="ntb" class="province-shape" data-name="Nusa Tenggara Barat" d="M325,235 L360,235 L355,250 L325,250 Z" />
-        <path id="ntt" class="province-shape" data-name="Nusa Tenggara Timur" d="M370,245 L420,240 L415,260 L365,260 Z" />
+        <path id="sulsel" class="province-shape" d="M300,150 L320,150 L330,190 L310,200 L290,190 Z" data-name="Sulawesi Selatan" tabindex="0"></path>
+        <path class="province-shape" d="M300,150 L310,100 L350,110 L330,140 L360,140 L350,160 L320,150 Z" data-name="Sulawesi Utara/Tengah" tabindex="0"></path>
 
-        <path id="kalbar" class="province-shape" data-name="Kalimantan Barat" d="M190,100 L230,80 L250,130 L200,150 Z" />
-        <path id="kalteng" class="province-shape" data-name="Kalimantan Tengah" d="M230,130 L280,120 L280,160 L220,160 Z" />
-        <path id="kalsel" class="province-shape" data-name="Kalimantan Selatan" d="M280,140 L300,140 L295,165 L275,160 Z" />
-        <path id="kaltim" class="province-shape" data-name="Kalimantan Timur (IKN)" d="M260,80 L300,70 L300,130 L260,120 Z" />
-        <path id="kaltara" class="province-shape" data-name="Kalimantan Utara" d="M260,60 L300,60 L290,80 L250,80 Z" />
+        <path id="banten" class="province-shape" d="M130,170 L150,170 L150,185 L130,180 Z" data-name="Banten" tabindex="0"></path>
+        <path id="jakarta" class="province-shape" d="M150,170 L160,170 L160,175 L150,175 Z" data-name="DKI Jakarta" tabindex="0"></path>
+        <path id="jabar" class="province-shape" d="M150,175 L180,175 L180,190 L150,185 Z" data-name="Jawa Barat" tabindex="0"></path>
+        <path id="jateng" class="province-shape" d="M180,175 L210,178 L210,192 L180,190 Z" data-name="Jawa Tengah" tabindex="0"></path>
+        <path id="diy" class="province-shape" d="M195,190 L210,190 L205,198 Z" data-name="DI Yogyakarta" tabindex="0"></path>
+        <path id="jatim" class="province-shape" d="M210,178 L250,180 L240,200 L210,192 Z" data-name="Jawa Timur" tabindex="0"></path>
 
-        <path id="sulut" class="province-shape" data-name="Sulawesi Utara" d="M420,60 L460,55 L450,70 L410,75 Z" />
-        <path id="gorontalo" class="province-shape" data-name="Gorontalo" d="M400,75 L420,70 L420,85 L400,85 Z" />
-        <path id="sulteng" class="province-shape" data-name="Sulawesi Tengah" d="M380,85 L440,80 L430,120 L390,120 Z" />
-        <path id="sulbar" class="province-shape" data-name="Sulawesi Barat" d="M380,120 L400,120 L400,145 L385,140 Z" />
-        <path id="sulsel" class="province-shape" data-name="Sulawesi Selatan" d="M400,130 L430,125 L430,165 L405,165 Z" />
-        <path id="sultra" class="province-shape" data-name="Sulawesi Tenggara" d="M430,125 L460,130 L455,155 L435,145 Z" />
+        <path id="bali" class="province-shape" d="M255,190 L270,195 L265,205 Z" data-name="Bali" tabindex="0"></path>
+        <path class="province-shape" d="M275,195 L320,200 L315,210 L280,205 Z" data-name="Nusa Tenggara" tabindex="0"></path>
 
-        <path id="malut" class="province-shape" data-name="Maluku Utara" d="M480,70 L520,70 L510,100 L490,95 Z" />
-        <path id="maluku" class="province-shape" data-name="Maluku" d="M480,110 L520,110 L510,140 L470,130 Z" />
+        <path id="papua" class="province-shape" d="M550,130 L650,130 L700,160 L680,200 L550,180 Z" data-name="Papua" tabindex="0"></path>
 
-        <path id="pabd" class="province-shape" data-name="Papua Barat Daya" d="M530,90 L560,80 L560,100 L530,100 Z" /> <path id="pabar" class="province-shape" data-name="Papua Barat" d="M530,100 L560,100 L560,125 L540,120 Z" /> <path id="pateng" class="province-shape" data-name="Papua Tengah" d="M560,95 L610,95 L610,120 L560,125 Z" />
-        <path id="papua" class="province-shape" data-name="Papua (Induk)" d="M610,85 L660,85 L660,110 L610,110 Z" />
-        <path id="papeg" class="province-shape" data-name="Papua Pegunungan" d="M610,110 L660,110 L660,130 L610,120 Z" />
-        <path id="pasel" class="province-shape" data-name="Papua Selatan" d="M610,120 L660,130 L650,155 L600,145 Z" />
       </svg>
-      </div>
+    </div>
 
     <div>
       <h3 style="margin-top: 0; margin-bottom: 20px;">🏆 Top 5 Instansi</h3>
@@ -226,6 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Hitung Opacity (0.2 s/d 1.0)
         const opacity = (jumlah / maxVal) * 0.8 + 0.2;
         shape.style.fill = `rgba(0, 43, 92, ${opacity})`; // Warna Navy Blue
+        // Force opacity lewat inline style
       } else {
         shape.style.fill = '#e0e0e0'; // Abu-abu jika 0
       }
