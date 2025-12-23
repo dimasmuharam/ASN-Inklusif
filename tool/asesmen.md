@@ -280,7 +280,7 @@ async function generateAccessiblePDF() {
   const margin = 20;
   let yPos = 20; // Cursor posisi vertikal
 
-  // 1. KOP SURAT
+  // 1. KOP SURAT (UPDATE SESUAI REQUEST)
   const logoUrl = "/assets/img/logo.png";
   try { doc.addImage(logoUrl, 'PNG', margin, 15, 25, 25); } catch(e) {}
 
@@ -290,10 +290,11 @@ async function generateAccessiblePDF() {
   
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text("Gerakan Nasional Pegawai Sipil Negara Penyandang Disabilitas", margin + 30, 28);
-  doc.text("Website: www.asninklusif.id | Email: contact@asninklusif.id", margin + 30, 34);
+  doc.text("Sinergi Indonesia Inklusif", margin + 30, 28);
+  doc.text("https://www.asninklusif.or.id | contact@asninklusif.or.id", margin + 30, 34);
   
-  doc.setLineWidth(1);
+  // Garis Bawah Kop (Dibuat sedikit lebih tebal untuk formalitas)
+  doc.setLineWidth(1.5);
   doc.line(margin, 42, pageWidth - margin, 42);
 
   yPos = 55;
@@ -385,14 +386,9 @@ async function generateAccessiblePDF() {
   doc.line(pageWidth - margin - 40, footerY + 31, pageWidth - margin, footerY + 31); 
 
   // --- LOGIKA NAMA FILE DINAMIS ---
-  // 1. Bersihkan Nama Instansi (Ganti spasi dengan underscore, hapus karakter aneh)
   const cleanInstansi = globalData.instansi.replace(/[^a-zA-Z0-9]/g, "_").substring(0, 30);
-  
-  // 2. Format Tanggal (YYYY-MM-DD)
   const dateObj = new Date();
   const cleanDate = dateObj.toISOString().split('T')[0];
-
-  // 3. Gabungkan
   const fileName = `Laporan_Audit_${cleanInstansi}_${cleanDate}.pdf`;
 
   // Simpan File
