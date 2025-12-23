@@ -1,251 +1,280 @@
 ---
 layout: default
-title: "Quick Assessment Inklusivitas Unit Kerja Pemerintah"
+title: "Asesmen Diagnostik Inklusivitas Instansi"
 permalink: /tool/asesmen/
 ---
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<div style="display:none">
-  <h1>Audit Aksesibilitas Kantor Pemerintah & Unit Kerja</h1>
-  <p>Alat ukur kesiapan instansi pemerintah dalam menerapkan UU Penyandang Disabilitas, standar ILO, dan ISO 30415.</p>
-</div>
+<style>
+  /* 1. Style Form & Container */
+  .audit-container { max-width: 800px; margin: 40px auto; font-family: sans-serif; }
+  .question-card { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+  .question-card h3 { margin-top: 0; font-size: 1.1em; color: var(--primary-color); }
+  
+  .option-label { display: block; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; margin-top: 8px; cursor: pointer; transition: 0.2s; }
+  .option-label:hover { background: rgba(0, 43, 92, 0.05); border-color: var(--primary-color); }
+  
+  /* 2. Tombol & Hasil */
+  .btn-primary { background: #002b5c; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; width: 100%; font-weight: bold; margin-top: 20px; }
+  .btn-primary:hover { background: #004080; }
+  
+  #result-area { display: none; text-align: center; margin-top: 40px; padding: 30px; background: #e3f2fd; border-radius: 12px; border: 1px solid #90caf9; }
 
-<div class="container" style="max-width: 900px; margin: 40px auto;">
+  /* 3. DESAIN DOKUMEN HASIL (Disembunyikan) */
+  #certificate-node {
+    position: fixed; left: -9999px; top: 0;
+    width: 1000px; height: 1414px; /* Ukuran Kertas A4 Portrait (kurang lebih) */
+    background: #fff;
+    color: #333;
+    padding: 60px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #ddd; /* Border tipis saja buat margin */
+  }
 
-  <section class="asesmen-intro">
-    <h1 style="text-align: center; margin-bottom: 10px;">📊 Instrumen Asesmen Inklusivitas Instansi</h1>
-    <p style="text-align: center; font-size: 1.1em; opacity: 0.8; margin-bottom: 40px;">
-      Diagnostik cepat kesiapan unit kerja Anda dalam menerapkan <strong>Manajemen ASN Inklusif</strong>.
-    </p>
+  /* Layout Dokumen Resmi */
+  .doc-header { border-bottom: 5px double #002b5c; padding-bottom: 20px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
+  .doc-logo { height: 100px; }
+  .doc-kop { text-align: left; flex-grow: 1; }
+  .doc-kop h1 { margin: 0; font-size: 28px; color: #002b5c; text-transform: uppercase; }
+  .doc-kop p { margin: 5px 0 0; font-size: 14px; color: #666; }
+  
+  .doc-title { text-align: center; margin-bottom: 40px; }
+  .doc-title h2 { margin: 0; font-size: 24px; text-decoration: underline; }
+  .doc-number { font-size: 14px; color: #555; margin-top: 5px; }
 
-    <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border-left: 5px solid var(--accent-color); margin-bottom: 40px; border: 1px solid var(--border-color);">
-      <h2 style="margin-top: 0; font-size: 1.3em;">Mengapa Asesmen Ini Penting?</h2>
-      
-      <p>Mewujudkan Birokrasi Berkelas Dunia tidak mungkin terjadi tanpa prinsip <strong>Meritokrasi</strong> yang inklusif. Tantangan terbesar sektor publik saat ini adalah kekakuan anggaran (DIPA) dan infrastruktur gedung lama.</p>
-      
-      <p>Berbeda dengan swasta, instansi pemerintah memiliki mandat konstitusi untuk menjadi <strong>Role Model</strong> pemenuhan Hak Asasi Manusia.</p>
+  .doc-grid { display: grid; grid-template-columns: 150px 1fr; gap: 10px; margin-bottom: 30px; font-size: 16px; }
+  .doc-label { font-weight: bold; }
+  .doc-val { border-bottom: 1px dotted #999; }
+
+  .doc-score-box { background: #f9f9f9; border: 2px solid #002b5c; padding: 20px; text-align: center; margin: 30px 0; border-radius: 10px; }
+  .doc-score-val { font-size: 48px; font-weight: bold; color: #002b5c; display: block; }
+  .doc-predikat { font-size: 24px; font-weight: bold; margin-top: 10px; display: block; }
+
+  .doc-desc { font-size: 16px; line-height: 1.6; text-align: justify; margin-bottom: 30px; }
+  .doc-recommendation { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; font-size: 15px; margin-bottom: 40px; }
+
+  .doc-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 50px; }
+  .qr-area { text-align: center; font-size: 12px; }
+  .qr-img { width: 120px; height: 120px; margin-bottom: 10px; border: 1px solid #eee; }
+  .sign-area { text-align: center; width: 300px; }
+  .sign-name { font-weight: bold; text-decoration: underline; margin-top: 80px; font-size: 18px; }
+</style>
+
+<div class="container audit-container">
+  
+  <div style="text-align: center; margin-bottom: 40px;">
+    <h1>🔍 Audit Diagnostik Inklusivitas</h1>
+    <p>Asesmen awal untuk memetakan kesiapan instansi ramah disabilitas.</p>
+  </div>
+
+  <div class="question-card" style="border-left: 5px solid var(--accent-color);">
+    <h3 style="margin-bottom: 15px;">Identitas Penerima Laporan</h3>
+    <label>Nama Pejabat/PIC:</label>
+    <input type="text" id="userName" placeholder="Nama Lengkap..." style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <label>Nama Instansi/Unit Kerja:</label>
+    <input type="text" id="agencyName" placeholder="Nama Instansi..." style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+
+  <form id="auditForm">
+    <div class="question-card">
+      <h3>1. Aksesibilitas Fisik (Bidang Miring/Ramp)</h3>
+      <label class="option-label"><input type="radio" name="q1" value="20"> Tersedia sesuai standar teknis</label>
+      <label class="option-label"><input type="radio" name="q1" value="10"> Tersedia tapi belum standar</label>
+      <label class="option-label"><input type="radio" name="q1" value="0"> Belum tersedia</label>
     </div>
-  </section>
 
-  <form id="auditForm" style="background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
-    
-    <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
-      <div style="margin-bottom: 15px; padding: 15px; background: #f0f7ff; border-radius: 6px; font-size: 0.9em; border: 1px solid #d0e3ff;">
-        <strong>📋 Petunjuk Pengisian:</strong><br>
-        Jawablah sesuai kondisi riil di lapangan. Sistem akan menerbitkan Sertifikat Digital dengan QR Code Validasi.
-      </div>
-      
-      <div style="font-size: 0.85em; color: #666;">
-        <strong>📚 Dasar Penyusunan Instrumen:</strong>
-        <ul style="margin: 5px 0 0 20px; padding: 0;">
-          <li><strong>UU No. 8 Tahun 2016</strong> tentang Penyandang Disabilitas (Pasal 11 & 27).</li>
-          <li><strong>ILO Global Business & Disability Network Charter</strong> (Prinsip Non-Diskriminasi).</li>
-          <li><strong>ISO 30415:2021</strong> (Human Resource Management – Diversity and Inclusion).</li>
-        </ul>
-      </div>
+    <div class="question-card">
+      <h3>2. Fasilitas Sanitasi (Toilet Aksesibel)</h3>
+      <label class="option-label"><input type="radio" name="q2" value="20"> Tersedia, pintu lebar & ada handrail</label>
+      <label class="option-label"><input type="radio" name="q2" value="10"> Toilet umum luas (bisa masuk kursi roda)</label>
+      <label class="option-label"><input type="radio" name="q2" value="0"> Belum tersedia</label>
     </div>
 
-    <h3 class="section-title">A. Komitmen & Regulasi</h3>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah instansi memiliki dokumen tertulis (SK Tim/Peraturan) tentang layanan inklusif?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah tersedia anggaran (DIPA) khusus untuk Akomodasi yang Layak (non-bansos)?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah tersedia kanal pengaduan diskriminasi yang aksesibel & rahasia?</span></label></div>
-
-    <h3 class="section-title">B. HR & Pengembangan Karir</h3>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah pengumuman lowongan umum eksplisit mengundang disabilitas melamar?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah pewawancara seleksi sudah dilatih "Etika Berinteraksi dengan Disabilitas"?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah pegawai disabilitas punya akses setara ke Diklatpim/Beasiswa?</span></label></div>
-
-    <h3 class="section-title">C. Aksesibilitas Fisik & Digital</h3>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah jalur dari gerbang hingga ruang kerja utama bebas hambatan (step-free)?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah tersedia toilet aksesibel yang fungsional di lantai kerja?</span></label></div>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah aplikasi internal (E-Kinerja) sudah diuji dengan Pembaca Layar?</span></label></div>
-
-    <h3 class="section-title">D. Budaya Organisasi</h3>
-    <div class="q-item"><label class="check-label"><input type="checkbox" value="10"> <span>Apakah pernah diadakan sosialisasi <em>Disability Awareness</em> (2 thn terakhir)?</span></label></div>
-
-    <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
-      <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nama Unit Kerja / Instansi:</label>
-      <input type="text" id="unitName" placeholder="Contoh: Biro SDM Kementerian X" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <div class="question-card">
+      <h3>3. Aksesibilitas Digital (Website & Aplikasi)</h3>
+      <label class="option-label"><input type="radio" name="q3" value="20"> Website bisa dibaca screen reader</label>
+      <label class="option-label"><input type="radio" name="q3" value="10"> Ada website, belum diuji aksesibilitas</label>
+      <label class="option-label"><input type="radio" name="q3" value="0"> Tidak punya website</label>
     </div>
 
-    <div style="margin-top: 30px; text-align: center;">
-      <button type="button" onclick="generatePDF()" class="button-cta" style="border: none; cursor: pointer; font-size: 1.1rem; min-width: 250px;">
-        🖨️ Proses & Download Sertifikat PDF
-      </button>
-      <p id="loadingText" style="display:none; color: #666; margin-top:10px;">
-        <span class="loader-icon">⚙️</span> Sedang memproses data & QR Code...
-      </p>
+    <div class="question-card">
+      <h3>4. Kebijakan Ketenagakerjaan (Kuota 2%)</h3>
+      <label class="option-label"><input type="radio" name="q4" value="20"> Memenuhi/melebihi kuota 2%</label>
+      <label class="option-label"><input type="radio" name="q4" value="10"> Ada kebijakan, kuota belum penuh</label>
+      <label class="option-label"><input type="radio" name="q4" value="0"> Belum ada kebijakan khusus</label>
     </div>
+
+    <div class="question-card">
+      <h3>5. Layanan Komunikasi (Juru Bahasa Isyarat)</h3>
+      <label class="option-label"><input type="radio" name="q5" value="20"> Tersedia petugas/JBI on-site</label>
+      <label class="option-label"><input type="radio" name="q5" value="10"> Menggunakan tulisan/aplikasi bantu</label>
+      <label class="option-label"><input type="radio" name="q5" value="0"> Belum tersedia layanan khusus</label>
+    </div>
+
+    <button type="button" onclick="prosesLaporan()" class="btn-primary">📝 Proses & Terbitkan Laporan</button>
   </form>
 
-  <div id="certificateTemplate" style="width: 750px; background: #fff; padding: 40px; display: none; position: relative;">
+  <div id="result-area">
+    <h2>Laporan Siap!</h2>
+    <p>Dokumen hasil asesmen telah dibuat dengan nomor registrasi sistem.</p>
+    <button onclick="downloadPDF()" class="btn-primary" style="background: #2e7d32;">
+      📥 Download Dokumen Resmi (PNG)
+    </button>
+  </div>
+
+</div>
+
+<div id="certificate-node">
+  
+  <div class="doc-header">
+    <img src="/assets/img/logo.png" alt="Logo" class="doc-logo">
+    <div class="doc-kop">
+      <h1>Forum ASN Inklusif</h1>
+      <p>Gerakan Nasional Pegawai Sipil Negara Penyandang Disabilitas Indonesia</p>
+      <p>www.asninklusif.id | contact@asninklusif.id</p>
+    </div>
+  </div>
+
+  <div class="doc-title">
+    <h2>LAPORAN HASIL ASESMEN DIAGNOSTIK</h2>
+    <div class="doc-number" id="doc-nomor">No: ASN/2025/XII/00000</div>
+  </div>
+
+  <div class="doc-grid">
+    <div class="doc-label">Nama Pejabat</div>
+    <div class="doc-val" id="doc-nama">-</div>
     
-    <div style="border-bottom: 3px solid #002b5c; padding-bottom: 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between;">
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://www.asninklusif.or.id/assets/img/logo.png" width="80" crossorigin="anonymous">
-        <div style="text-align: left;">
-          <h2 style="margin: 0; color: #002b5c; font-size: 24px; text-transform: uppercase;">Forum ASN Inklusif</h2>
-          <small style="font-size: 12px; color: #555;">Sinergi Indonesia Inklusif | www.asninklusif.or.id</small>
-        </div>
-      </div>
-      <div style="text-align: right;">
-        <span style="background: #002b5c; color: #fff; padding: 5px 15px; border-radius: 4px; font-size: 12px; letter-spacing: 1px;">HASIL ASESMEN</span>
-      </div>
-    </div>
+    <div class="doc-label">Instansi</div>
+    <div class="doc-val" id="doc-instansi">-</div>
+    
+    <div class="doc-label">Tanggal Asesmen</div>
+    <div class="doc-val" id="doc-tanggal">-</div>
+  </div>
 
-    <div style="text-align: center; margin-top: 20px;">
-      <h1 style="margin: 0; font-size: 26px; color: #333;">LAPORAN DIAGNOSTIK INKLUSIVITAS</h1>
-      
-      <p style="margin-top: 5px; font-family: monospace; color: #666; font-size: 14px;">
-        No. Reg: <span id="docRegNumber">ASN/2025/X/0000</span>
-      </p>
+  <div class="doc-desc">
+    <p>Berdasarkan pengisian instrumen audit mandiri (Self-Assessment) terhadap indikator aksesibilitas fisik, digital, dan kebijakan layanan publik inklusif, maka instansi tersebut memperoleh hasil sebagai berikut:</p>
+  </div>
 
-      <div style="margin: 30px 0;">
-        <p>Berdasarkan asesmen mandiri <em>(self-assessment)</em>, Unit Kerja:</p>
-        <h2 id="pdfUnitName" style="font-size: 24px; margin: 10px 0; color: #000; text-decoration: underline;">Nama Unit Kerja</h2>
-        
-        <p>Telah melakukan pengukuran kesiapan infrastruktur dan kebijakan inklusif dengan hasil:</p>
-        
-        <div style="background: #f8f9fa; border: 2px solid #dde1e6; width: 60%; margin: 20px auto; padding: 20px; border-radius: 8px;">
-          <span style="display: block; font-size: 14px; color: #555; margin-bottom: 5px;">SKOR INDEKS</span>
-          <span id="pdfScore" style="display: block; font-size: 48px; font-weight: 800; color: #002b5c; line-height: 1;">0</span>
-          <span style="display: block; font-size: 12px; color: #888; margin-bottom: 15px;">Skala 100</span>
-          
-          <div id="pdfBadge" style="background: #333; color: #fff; padding: 8px 20px; border-radius: 50px; font-weight: bold; display: inline-block;">
-            PREDIKAT
-          </div>
-        </div>
+  <div class="doc-score-box">
+    <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Indeks Inklusivitas</span>
+    <span class="doc-score-val" id="doc-skor">0</span>
+    <span class="doc-predikat" id="doc-predikat">-</span>
+  </div>
 
-        <div id="pdfDesc" style="font-size: 14px; color: #444; max-width: 80%; margin: 0 auto; line-height: 1.5; text-align: justify;">
-          Deskripsi hasil...
-        </div>
+  <div class="doc-recommendation">
+    <strong>Rekomendasi Tindak Lanjut:</strong>
+    <p id="doc-saran" style="margin: 5px 0 0 0;">-</p>
+  </div>
 
-        <div style="text-align: left; font-size: 10px; color: #777; margin-top: 30px; border-top: 1px dotted #ccc; padding-top: 10px;">
-          <strong>Basis Asesmen:</strong>
-          Indikator penilaian mengacu pada <em>UU No. 8/2016 tentang Penyandang Disabilitas</em>, <em>ILO Global Business & Disability Network Charter</em>, dan <em>ISO 30415:2021 (D&I)</em>.
-        </div>
-      </div>
-    </div>
+  <div class="doc-desc">
+    <p><em>Catatan: Dokumen ini merupakan diagnosa awal. Disarankan untuk mengajukan audit teknis lanjutan oleh tenaga ahli aksesibilitas bersertifikat guna mendapatkan rincian perbaikan yang sesuai standar PUPR.</em></p>
+  </div>
 
-    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
-      
-      <div style="width: 250px; text-align: left;">
-        <div id="qrcode" style="margin-bottom: 10px;"></div>
-        <p style="font-size: 10px; color: #888; margin: 0;">
-          <strong>Scan untuk Validasi</strong><br>
-          Dokumen ini dihasilkan secara digital.<br>
-          Data tersimpan dalam kode QR di atas.
-        </p>
-      </div>
-
-      <div style="text-align: center; width: 250px;">
-        <p id="pdfDate" style="margin: 0; font-size: 14px;">Jakarta, 22 Desember 2025</p>
-        <p style="margin: 5px 0 20px 0; font-weight: bold; font-size: 14px;">Ketua Forum ASN Inklusif</p>
-        
-        <div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-           <span style="font-family: 'Brush Script MT', cursive; font-size: 28px; color: #002b5c; transform: rotate(-5deg);">Dimas P. Muharam</span>
-        </div>
-
-        <p style="margin: 0; font-weight: bold; text-decoration: underline; font-size: 14px;">DIMAS PRASETYO MUHARAM</p>
-        <p style="margin: 0; font-size: 12px;">Founder</p>
-      </div>
+  <div class="doc-footer">
+    <div class="qr-area">
+      <img src="" id="doc-qr" class="qr-img" alt="QR Code Verifikasi">
+      <div>Scan untuk Validasi Data</div>
     </div>
     
-    <div style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 10px; color: #999; text-align: center;">
-      Dokumen ini diterbitkan oleh Sistem Asesmen Digital Forum ASN Inklusif. Validitas isi merupakan tanggung jawab pengisi survei.<br>
-      Untuk verifikasi lanjutan dan audit lapangan, hubungi: contact@asninklusif.or.id
+    <div class="sign-area">
+      <p>Jakarta, <span id="sign-date"></span></p>
+      <p>Mengetahui,<br>Ketua Forum ASN Inklusif</p>
+      <div class="sign-name">Dimas P. Muharam</div>
+      <div style="font-size: 12px;">NIP. -----------------</div>
     </div>
   </div>
 
 </div>
 
-<style>
-.section-title { color: var(--primary-color); margin-top: 25px; margin-bottom: 10px; border-bottom: 2px solid #eee; }
-.check-label { display: flex; gap: 10px; cursor: pointer; padding: 5px; }
-.check-label:hover { background: #f9f9f9; }
-@media (max-width: 600px) {
-  .asesmen-intro .grid { grid-template-columns: 1fr !important; }
-}
-</style>
-
 <script>
-function generatePDF() {
-  const unitName = document.getElementById('unitName').value;
-  if(!unitName) { alert("Mohon isi Nama Unit Kerja!"); return; }
+function generateNumber() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const random = Math.floor(1000 + Math.random() * 9000); // 4 digit acak
+  return `No: AUDIT/${year}/${month}/${random}`;
+}
 
-  // UI Loading
-  const btn = document.querySelector('.button-cta');
-  const loading = document.getElementById('loadingText');
-  btn.style.display = 'none';
-  loading.style.display = 'block';
+function prosesLaporan() {
+  // 1. Validasi Input
+  let nama = document.getElementById('userName').value;
+  let instansi = document.getElementById('agencyName').value;
+  
+  if(!nama || !instansi) { alert("Mohon lengkapi data nama dan instansi."); return; }
+  
+  let radios = document.querySelectorAll('input[type="radio"]:checked');
+  if(radios.length < 5) { alert("Mohon isi semua pertanyaan."); return; }
 
-  // 1. Hitung Skor
-  const inputs = document.querySelectorAll('#auditForm input[type="checkbox"]');
-  let score = 0;
-  inputs.forEach(input => { if(input.checked) score += parseInt(input.value); });
+  // 2. Hitung Skor
+  let total = 0;
+  radios.forEach(r => total += parseInt(r.value));
 
-  // 2. Predikat
-  let predikat = ""; let color = ""; let text = "";
-  if (score <= 40) {
-    predikat = "INISIATOR"; color = "#d9534f";
-    text = "Unit kerja Anda mulai menyadari isu disabilitas. Diperlukan reformasi kebijakan dasar dan komitmen pimpinan yang lebih kuat.";
-  } else if (score <= 70) {
-    predikat = "PROGRESIF"; color = "#f0ad4e";
-    text = "Unit kerja berada di jalur yang tepat. Fokuskan perbaikan pada detail aksesibilitas digital dan fasilitas fisik.";
+  // 3. Logika Bobot & Rekomendasi (Ini yang bikin berbobot)
+  let predikat = "";
+  let warna = "";
+  let saran = "";
+
+  if(total >= 80) {
+    predikat = "SANGAT BAIK (INKLUSIF)";
+    warna = "#2e7d32";
+    saran = "Instansi telah memenuhi standar dasar. Disarankan untuk menjadi role model bagi unit kerja lain dan melakukan pemeliharaan fasilitas secara berkala.";
+  } else if(total >= 50) {
+    predikat = "CUKUP (PERLU PENINGKATAN)";
+    warna = "#f9a825";
+    saran = "Instansi memiliki potensi, namun perlu melengkapi fasilitas vital seperti Toilet Aksesibel dan Website yang terbaca screen reader. Segera anggarkan perbaikan tahun depan.";
   } else {
-    predikat = "ROLE MODEL"; color = "#5cb85c";
-    text = "Luar biasa! Unit kerja Anda berpotensi menjadi instansi percontohan nasional dalam penerapan manajemen ASN inklusif.";
+    predikat = "KURANG (TIDAK AKSESIBEL)";
+    warna = "#c62828";
+    saran = "Sangat disarankan melakukan perombakan prioritas pada aksesibilitas fisik (Ramp) dan penyediaan layanan dasar bagi penyandang disabilitas sesuai UU No. 8 Tahun 2016.";
   }
 
-  // 3. Generate Nomor Registrasi
-  const now = new Date();
-  const dateStr = now.toISOString().slice(0,10).replace(/-/g,""); 
-  const timeStr = now.toTimeString().slice(0,5).replace(/:/g,""); 
-  const randomCode = Math.floor(1000 + Math.random() * 9000); 
-  const regNum = `ASN/${dateStr}/${timeStr}/${randomCode}`;
+  // 4. Masukkan Data ke Dokumen
+  const nomorDokumen = generateNumber();
+  const tanggalFull = new Date().toLocaleDateString('id-ID', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
 
-  // 4. Update Isi Sertifikat
-  document.getElementById('pdfUnitName').innerText = unitName;
-  document.getElementById('pdfScore').innerText = score;
-  document.getElementById('docRegNumber').innerText = "No. Reg: " + regNum;
+  document.getElementById('doc-nama').innerText = nama;
+  document.getElementById('doc-instansi').innerText = instansi;
+  document.getElementById('doc-tanggal').innerText = tanggalFull;
+  document.getElementById('doc-nomor').innerText = nomorDokumen;
+  document.getElementById('sign-date').innerText = new Date().toLocaleDateString('id-ID', {year: 'numeric', month: 'long', day: 'numeric'});
+
+  const elSkor = document.getElementById('doc-skor');
+  const elPredikat = document.getElementById('doc-predikat');
   
-  const badge = document.getElementById('pdfBadge');
-  badge.innerText = predikat;
-  badge.style.backgroundColor = color;
-  document.getElementById('pdfDesc').innerText = text;
-
-  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('pdfDate').innerText = "Jakarta, " + now.toLocaleDateString('id-ID', dateOptions);
-
-  // 5. Generate QR Code
-  document.getElementById("qrcode").innerHTML = ""; 
-  const qrData = `VALIDASI DOKUMEN FORUM ASN INKLUSIF\nNo.Reg: ${regNum}\nUnit: ${unitName}\nSkor: ${score} (${predikat})\nTgl: ${now.toLocaleDateString('id-ID')}\nDasar: UU No.8/2016, ISO 30415, ILO\n\nDokumen ini sah secara digital.`;
+  elSkor.innerText = total;
+  elSkor.style.color = warna;
   
-  new QRCode(document.getElementById("qrcode"), {
-    text: qrData, width: 100, height: 100,
-    colorDark : "#000000", colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.M
-  });
+  elPredikat.innerText = predikat;
+  elPredikat.style.color = warna;
+  
+  document.getElementById('doc-saran').innerText = saran;
 
-  // 6. Cetak ke PDF
+  // 5. Generate QR Code (Pakai API QR Server Gratis)
+  // Isinya adalah ringkasan data validasi
+  const qrData = `VALIDASI HASIL AUDIT\nNomor: ${nomorDokumen}\nInstansi: ${instansi}\nSkor: ${total}\nPredikat: ${predikat}\nValid: Forum ASN Inklusif`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+  document.getElementById('doc-qr').src = qrUrl;
+
+  // Tampilkan Area Download
+  document.getElementById('result-area').style.display = 'block';
+  document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
+}
+
+function downloadPDF() {
+  const element = document.getElementById("certificate-node");
+  
+  // Tunggu gambar QR load dulu sebentar
   setTimeout(() => {
-    const element = document.getElementById('certificateTemplate');
-    element.style.display = 'block';
-
-    var opt = {
-      margin:       10,
-      filename:     'Sertifikat-Inklusif-' + regNum.replace(/\//g,'-') + '.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save().then(function(){
-      element.style.display = 'none';
-      btn.style.display = 'inline-block';
-      loading.style.display = 'none';
+    html2canvas(element, {
+      scale: 2, // Kualitas Tinggi
+      backgroundColor: "#ffffff"
+    }).then(canvas => {
+      let link = document.createElement("a");
+      link.download = "Laporan-Audit-Inklusif.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
     });
   }, 500);
 }
