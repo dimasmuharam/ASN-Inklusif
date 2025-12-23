@@ -44,7 +44,12 @@ permalink: /peta/
   .top-rank { background: #002b5c; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8em; margin-right: 10px; }
   
   /* Loading Spinner untuk Peta */
-  #loading-map { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; color: #666; }
+  #loading-map { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    font-weight: bold; color: #002b5c; background: rgba(255,255,255,0.9); 
+    padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    z-index: 10; text-align: center;
+  }
 </style>
 
 <div class="container dashboard-wrapper">
@@ -79,9 +84,9 @@ permalink: /peta/
       <h3 style="margin-top: 0;">Peta Kepadatan (Interaktif)</h3>
       <p style="font-size: 0.9em; color: #666; margin-bottom: 15px;">Peta menggunakan data geografis presisi. Warna lebih gelap menandakan jumlah anggota lebih banyak.</p>
       
-      <div class="map-container">
-        <div id="loading-map">⏳ Memuat Peta Indonesia...</div>
-        <div id="chart-map" style="width: 100%; height: 100%;"></div>
+      <div class="map-container" aria-label="Peta Interaktif Indonesia. Gunakan tabel di bawah untuk data aksesibel.">
+        <div id="loading-map" role="status" aria-live="polite">⏳ Sedang mengambil data peta...</div>
+        <div id="chart-map" style="width: 100%; height: 100%;" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -119,11 +124,9 @@ permalink: /peta/
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. DATA DARI JEKYLL -> JAVASCRIPT
-    // Kita menyusun data agar dikenali oleh sistem peta
+    // 1. DATA DARI JEKYLL
     const mapData = [
       {% for prov in site.data.sebaran.provinsi %}
-      // ECharts butuh nama provinsi yang BAKU, kita coba mapping nama manual ke standar
       { name: "{{ prov.nama }}", value: {{ prov.jumlah }} },
       {% endfor %}
     ];
@@ -157,11 +160,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const chartDom = document.getElementById('chart-map');
     const myChart = echarts.init(chartDom);
     
-    // URL GeoJSON Indonesia (Sumber Open Source Terpercaya)
-    const indoGeoJSON = 'https://raw.githubusercontent.com/superpikar/indonesia-geojson/master/indonesia-province-simple-json.json';
+    // UPDATE: Gunakan CDN JSDelivr agar lebih stabil dan cepat
+    const indoGeoJSON = 'https://cdn.jsdelivr.net/gh/superpikar/indonesia-geojson@master/indonesia-province-simple-json.json';
 
     fetch(indoGeoJSON)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error("Gagal mengambil data peta");
+            return response.json();
+        })
         .then(geoJson => {
             // Sembunyikan loading
             document.getElementById('loading-map').style.display = 'none';
@@ -173,40 +179,33 @@ document.addEventListener("DOMContentLoaded", function() {
             const option = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: '{b}<br/><b>{c} Anggota</b>' // {b}=Nama, {c}=Jumlah
+                    formatter: '{b}<br/><b>{c} Anggota</b>' 
                 },
                 visualMap: {
                     min: 0,
-                    max: 500, // Angka maksimal untuk skala warna (bisa disesuaikan)
+                    max: 200, // Skala warna maksimal
                     left: 'left',
                     bottom: 'bottom',
                     text: ['Banyak', 'Sedikit'],
                     calculable: true,
-                    inRange: {
-                        color: ['#e3f2fd', '#2196f3', '#0d47a1'] // Gradasi Biru
-                    }
+                    inRange: { color: ['#e3f2fd', '#2196f3', '#0d47a1'] }
                 },
                 series: [
                     {
                         name: 'Anggota ASN Inklusif',
                         type: 'map',
                         map: 'indonesia',
-                        roam: true, // Bisa zoom & geser
+                        roam: true,
                         emphasis: {
                             label: { show: true },
-                            itemStyle: {
-                                areaColor: '#ffd700' // Warna Kuning saat Hover
-                            }
+                            itemStyle: { areaColor: '#ffd700' }
                         },
-                        data: mapData, // Masukkan data dari Jekyll tadi
-                        
-                        // Perbaikan Nama Provinsi (Mapping Nama Data ke Nama Peta)
-                        // Peta biasanya pakai "Aceh", "Sumatera Utara".
-                        // Jika di data Anda namanya beda dikit, dia gak akan muncul warnanya.
-                        // Pastikan di _data/sebaran.yml namanya baku.
+                        data: mapData,
+                        // Kamus Nama Provinsi (Mapping)
                         nameMap: {
                             'Daerah Istimewa Yogyakarta': 'DI Yogyakarta',
-                            'DKI Jakarta': 'DKI Jakarta'
+                            'DKI Jakarta': 'DKI Jakarta',
+                            'Kepulauan Bangka Belitung': 'Bangka Belitung'
                         }
                     }
                 ]
@@ -215,11 +214,11 @@ document.addEventListener("DOMContentLoaded", function() {
             myChart.setOption(option);
         })
         .catch(err => {
-            document.getElementById('loading-map').innerText = "Gagal memuat peta. Cek koneksi internet.";
+            document.getElementById('loading-map').innerHTML = "⚠️ Gagal memuat visual peta.<br><small>Silakan cek Tabel Rincian Data di bawah.</small>";
+            document.getElementById('loading-map').style.color = "red";
             console.error(err);
         });
 
-    // Agar responsif saat layar diubah ukurannya
     window.addEventListener('resize', function() {
         myChart.resize();
     });
