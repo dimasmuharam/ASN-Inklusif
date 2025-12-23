@@ -16,66 +16,67 @@ ragam_nasional:
   - { jenis: "Intelektual", jumlah: 5, warna: "#ffd740" }
   - { jenis: "Ganda", jumlah: 5, warna: "#ffab40" }
 
-# 3. DATA INSTANSI (ACAK SAJA, TIDAK PERLU DIURUTKAN)
-# Sistem akan otomatis mengambil Top 5 tertinggi
+# 3. DATA INSTANSI
 data_instansi:
   - { nama: "Kemenkeu", jumlah: 45 }
   - { nama: "Pemprov Jabar", jumlah: 35 }
   - { nama: "Kemenag", jumlah: 25 }
-  - { nama: "Pemprov DKI Jakarta", jumlah: 55 }  # Paling banyak, taruh acak ga masalah
+  - { nama: "Pemprov DKI Jakarta", jumlah: 55 }
   - { nama: "Kemensos", jumlah: 30 }
   - { nama: "Kemendikbud", jumlah: 15 }
   - { nama: "Pemkot Surabaya", jumlah: 10 }
   - { nama: "Kemenhub", jumlah: 5 }
 
-# 4. DATA PROVINSI (Hanya Jumlah, Tanpa Dominasi)
+# 4. DATA PROVINSI
+# Catatan: id_peta dihapus karena tidak lagi diperlukan oleh peta digital ECharts
 provinsi:
   # SUMATERA
-  - { nama: "Aceh", id_peta: "aceh", jumlah: 8 }
-  - { nama: "Sumatera Utara", id_peta: "sumut", jumlah: 12 }
-  - { nama: "Sumatera Barat", id_peta: "sumbar", jumlah: 6 }
-  - { nama: "Riau", id_peta: "riau", jumlah: 8 }
-  - { nama: "Kepulauan Riau", id_peta: "kepri", jumlah: 4 }
-  - { nama: "Jambi", id_peta: "jambi", jumlah: 5 }
-  - { nama: "Bengkulu", id_peta: "bengkulu", jumlah: 3 }
-  - { nama: "Sumatera Selatan", id_peta: "sumsel", jumlah: 10 }
-  - { nama: "Kep. Bangka Belitung", id_peta: "babel", jumlah: 4 }
-  - { nama: "Lampung", id_peta: "lampung", jumlah: 7 }
+  - { nama: "Aceh", jumlah: 8 }
+  - { nama: "Sumatera Utara", jumlah: 12 }
+  - { nama: "Sumatera Barat", jumlah: 6 }
+  - { nama: "Riau", jumlah: 8 }
+  - { nama: "Kepulauan Riau", jumlah: 4 }
+  - { nama: "Jambi", jumlah: 5 }
+  - { nama: "Bengkulu", jumlah: 3 }
+  - { nama: "Sumatera Selatan", jumlah: 10 }
+  - { nama: "Bangka Belitung", jumlah: 4 } # Diubah agar terdeteksi peta
+  - { nama: "Lampung", jumlah: 7 }
 
   # JAWA
-  - { nama: "Banten", id_peta: "banten", jumlah: 20 }
-  - { nama: "DKI Jakarta", id_peta: "jakarta", jumlah: 80 }
-  - { nama: "Jawa Barat", id_peta: "jabar", jumlah: 60 }
-  - { nama: "Jawa Tengah", id_peta: "jateng", jumlah: 45 }
-  - { nama: "DI Yogyakarta", id_peta: "diy", jumlah: 15 }
-  - { nama: "Jawa Timur", id_peta: "jatim", jumlah: 50 }
+  - { nama: "Banten", jumlah: 20 }
+  - { nama: "DKI Jakarta", jumlah: 80 }
+  - { nama: "Jawa Barat", jumlah: 60 }
+  - { nama: "Jawa Tengah", jumlah: 45 }
+  - { nama: "DI Yogyakarta", jumlah: 15 }
+  - { nama: "Jawa Timur", jumlah: 50 }
 
   # BALI NUSRA
-  - { nama: "Bali", id_peta: "bali", jumlah: 10 }
-  - { nama: "Nusa Tenggara Barat", id_peta: "ntb", jumlah: 6 }
-  - { nama: "Nusa Tenggara Timur", id_peta: "ntt", jumlah: 5 }
+  - { nama: "Bali", jumlah: 10 }
+  - { nama: "Nusa Tenggara Barat", jumlah: 6 }
+  - { nama: "Nusa Tenggara Timur", jumlah: 5 }
 
   # KALIMANTAN
-  - { nama: "Kalimantan Barat", id_peta: "kalbar", jumlah: 8 }
-  - { nama: "Kalimantan Tengah", id_peta: "kalteng", jumlah: 4 }
-  - { nama: "Kalimantan Selatan", id_peta: "kalsel", jumlah: 6 }
-  - { nama: "Kalimantan Timur", id_peta: "kaltim", jumlah: 15 }
-  - { nama: "Kalimantan Utara", id_peta: "kaltara", jumlah: 3 }
+  - { nama: "Kalimantan Barat", jumlah: 8 }
+  - { nama: "Kalimantan Tengah", jumlah: 4 }
+  - { nama: "Kalimantan Selatan", jumlah: 6 }
+  - { nama: "Kalimantan Timur", jumlah: 15 }
+  - { nama: "Kalimantan Utara", jumlah: 3 }
 
   # SULAWESI
-  - { nama: "Sulawesi Utara", id_peta: "sulut", jumlah: 5 }
-  - { nama: "Gorontalo", id_peta: "gorontalo", jumlah: 3 }
-  - { nama: "Sulawesi Tengah", id_peta: "sulteng", jumlah: 4 }
-  - { nama: "Sulawesi Barat", id_peta: "sulbar", jumlah: 3 }
-  - { nama: "Sulawesi Selatan", id_peta: "sulsel", jumlah: 12 }
-  - { nama: "Sulawesi Tenggara", id_peta: "sultra", jumlah: 4 }
+  - { nama: "Sulawesi Utara", jumlah: 5 }
+  - { nama: "Gorontalo", jumlah: 3 }
+  - { nama: "Sulawesi Tengah", jumlah: 4 }
+  - { nama: "Sulawesi Barat", jumlah: 3 }
+  - { nama: "Sulawesi Selatan", jumlah: 12 }
+  - { nama: "Sulawesi Tenggara", jumlah: 4 }
 
   # MALUKU PAPUA
-  - { nama: "Maluku", id_peta: "maluku", jumlah: 5 }
-  - { nama: "Maluku Utara", id_peta: "malut", jumlah: 3 }
-  - { nama: "Papua", id_peta: "papua", jumlah: 6 }
-  - { nama: "Papua Barat", id_peta: "pabar", jumlah: 4 }
-  - { nama: "Papua Selatan", id_peta: "pasel", jumlah: 2 }
-  - { nama: "Papua Tengah", id_peta: "pateng", jumlah: 2 }
-  - { nama: "Papua Pegunungan", id_peta: "papeg", jumlah: 1 }
-  - { nama: "Papua Barat Daya", id_peta: "pabd", jumlah: 2 }
+  - { nama: "Maluku", jumlah: 5 }
+  - { nama: "Maluku Utara", jumlah: 3 }
+  - { nama: "Papua", jumlah: 6 }
+  - { nama: "Papua Barat", jumlah: 4 }
+  # Provinsi baru di bawah ini mungkin belum muncul di Peta (White Area), tapi ada di Tabel
+  - { nama: "Papua Selatan", jumlah: 2 }
+  - { nama: "Papua Tengah", jumlah: 2 }
+  - { nama: "Papua Pegunungan", jumlah: 1 }
+  - { nama: "Papua Barat Daya", jumlah: 2 }
