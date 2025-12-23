@@ -73,13 +73,13 @@ body.dark-mode .sb-action a { color: var(--text-color) !important; }
   
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 4px solid #448aff;">
     <h2 style="margin-top: 0;">🗺️ Peta Data</h2>
-    <p>Lihat sebaran demografi ASN disabilitas di berbagai instansi pemerintah dan provinsi di Indonesia.</p>
+    <p>Lihat sebaran demografi ASN Inklusif di berbagai instansi pemerintah dan provinsi di Indonesia.</p>
     <a href="{{ "/peta/" | relative_url }}" style="font-weight: bold; color: #448aff; text-decoration: none;">Lihat Dashboard Data →</a>
   </div>
 
   <div style="background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
     <h2 style="margin-top: 0;">📢 Lapor Advokasi</h2>
-    <p>Mengalami diskriminasi atau kendala karir? Laporkan kepada tim advokasi kami untuk pendampingan.</p>
+    <p>Mengalami diskriminasi atau kendala karir atas dasar disabilitas? Laporkan kepada tim advokasi kami.</p>
     <a href="{{ "/advokasi/" | relative_url }}" style="font-weight: bold; text-decoration: none;">Formulir Pengaduan →</a>
   </div>
 
