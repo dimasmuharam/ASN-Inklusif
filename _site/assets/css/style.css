@@ -1,6 +1,6 @@
 /* ==========================================================================
    FORUM ASN INKLUSIF - MAIN STYLESHEET (INTEGRATED)
-   Standard: WCAG 2.1 AA | Features: Dark Mode, Text Resizer, Sticky Nav
+   Standard: WCAG 2.1 AAA | Features: Dark Mode, Text Resizer, Sticky Nav
    ========================================================================== */
 
 /* 1. CSS VARIABLES (THEME CONFIG) */
@@ -9,7 +9,7 @@
     --header-bg: #002b5c;        /* Navy Blue Gelap */
     --header-text: #ffffff;      /* Teks Putih */
     --primary-color: #002b5c;    /* Judul Utama */
-    --accent-color: #007acc;     /* Link & Tombol (Biru Terang) */
+    --accent-color: #005a9c;     /* Link & Tombol (Biru Terang - AAA Compliant) */
     --highlight: #00b4d8;        /* Cyan - Aksen Modern */
     --bg-color: #ffffff;         /* Background Putih */
     --text-color: #222222;       /* Teks Hitam Pekat (Kontras Tinggi) */
