@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Bank Template Surat Advokasi | Forum ASN Inklusif</title>
+    <meta name="description" content="Wadah sinergi, advokasi, dan pengembangan kapasitas Aparatur Sipil Negara (ASN)  penyandang disabilitas dan non-disabilitas untuk mewujudkan birokrasi Indonesia yang inklusif.">
+    
+    <link rel="canonical" href="https://www.asninklusif.or.id/pustaka/template/">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
+
+    <header>
+        <div class="container navbar">
+            <div class="brand-wrapper">
+                <a href="/" title="Kembali ke Beranda Forum ASN Inklusif">
+                    <img src="/assets/img/logo.png" alt="Logo Forum ASN Inklusif: Lingkaran biru dengan ikon ragam disabilitas" width="60" height="auto">
+                </a>
+                
+                <div>
+                    <a href="/" class="brand-title">
+                        <h1>Forum ASN Inklusif</h1>
+                    </a>
+                    <small class="brand-subtitle">Sinergi Indonesia Inklusif</small>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <nav aria-label="Menu Utama">
+                    <ul id="nav-menu">
+                        <li><a href="/" class="">Beranda</a></li>
+                        <li><a href="/about/" class="">Tentang Kami</a></li>
+                        <li><a href="/program/" class="">Program</a></li>
+                        <li><a href="/library/" class="">Pustaka</a></li>
+                        <li><a href="/join/" class="">Keanggotaan</a></li>
+                        
+                        <li>
+                            <a href="/tool/asesmen/" style="color: var(--highlight); font-weight: bold;">
+                                🔍 Audit Instansi
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div style="display: flex; gap: 2px; margin-right: 5px;">
+                    <button id="font-down" aria-label="Kecilkan Huruf" title="Kecilkan Huruf" style="padding: 2px 8px; font-size: 0.8em;">A-</button>
+                    <button id="font-up" aria-label="Perbesar Huruf" title="Perbesar Huruf" style="padding: 2px 8px; font-size: 1em;">A+</button>
+                </div>
+
+                <button id="theme-toggle" aria-label="Ganti ke Mode Gelap" title="Ganti Tema">🌙</button>
+                <button id="lang-toggle" aria-label="Ganti Bahasa (ID/EN)" title="Ganti Bahasa">ID</button>
+                
+                <div id="google_translate_element" class="visually-hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+        <style>
+  /* Container */
+  .doc-container { max-width: 900px; margin: 40px auto; }
+
+  /* 1. Intro Section */
+  .intro-box { text-align: center; margin-bottom: 50px; }
+  .intro-tag { background: var(--accent-color); color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 0.85em; font-weight: bold; text-transform: uppercase; }
+  
+  /* 2. Kartu Surat */
+  .letter-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  }
+  .lc-meta { margin-bottom: 15px; }
+  .lc-cat { color: var(--highlight); font-weight: bold; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; }
+  .lc-title { margin: 5px 0 10px 0; color: var(--primary-color); font-size: 1.5em; }
+  .lc-desc { font-style: italic; opacity: 0.8; margin-bottom: 20px; line-height: 1.5; border-left: 3px solid var(--border-color); padding-left: 15px; }
+  body.dark-mode .lc-title { color: var(--highlight); }
+
+  /* Area Teks (Pre-formatted) */
+  .letter-content {
+    background: #f4f6f8;
+    border: 1px dashed #999;
+    padding: 25px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #2c3e50;
+    white-space: pre-wrap; /* Menjaga spasi & enter */
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  body.dark-mode .letter-content { background: #1e1e1e; color: #e0e0e0; border-color: #555; }
+
+  /* Highlight bagian yang perlu diedit [ ... ] */
+  .edit-mark { background-color: #ffeb3b; color: #000; padding: 0 2px; }
+
+  /* Tombol Aksi */
+  .btn-action-row { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+  .btn-copy {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .btn-copy:hover { background-color: var(--accent-color); }
+  .btn-copy:focus { outline: 3px solid var(--highlight); }
+
+  /* 3. FAQ Section */
+  .faq-section { margin-top: 60px; border-top: 1px solid var(--border-color); padding-top: 40px; }
+  .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); margin-bottom: 10px; border-radius: 8px; }
+  .faq-item summary { padding: 15px; cursor: pointer; font-weight: bold; list-style: none; display: flex; justify-content: space-between; }
+  .faq-item summary::after { content: '+'; font-weight: bold; color: var(--accent-color); }
+  .faq-item[open] summary::after { content: '-'; }
+  .faq-item div { padding: 0 15px 15px; border-top: 1px solid var(--border-color); padding-top: 15px; opacity: 0.9; line-height: 1.6; }
+
+  /* Utilitas Aksesibilitas */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+</style>
+
+<div class="container doc-container">
+
+  <div class="intro-box">
+    <span class="intro-tag">Advokasi Mandiri</span>
+    <h1 style="margin-top: 15px; margin-bottom: 15px;">Bank Surat &amp; Naskah Dinas</h1>
+    <p style="font-size: 1.15em; line-height: 1.6; opacity: 0.9;">
+      Perjuangkan hak "Akomodasi yang Layak" Anda dengan bahasa birokrasi yang tepat, santun, dan berdasar hukum. 
+      Tools ini dirancang untuk membantu ASN Disabilitas menyusun permohonan resmi tanpa rasa ragu.
+    </p>
+  </div>
+
+  <div style="background: rgba(0, 180, 216, 0.1); border-left: 5px solid var(--accent-color); padding: 20px; border-radius: 4px; margin-bottom: 40px;">
+    <h3 style="margin-top: 0; font-size: 1.1em;">💡 Panduan Penggunaan</h3>
+    <ol style="margin: 10px 0 0 20px; padding: 0; line-height: 1.5;">
+      <li>Pilih template surat yang sesuai dengan kebutuhan Anda di bawah ini.</li>
+      <li>Tekan tombol <strong>"Salin Naskah"</strong>. Pembaca layar akan mengkonfirmasi jika teks berhasil disalin.</li>
+      <li>Tempel (Paste) ke aplikasi pengolah kata (MS Word/Google Docs).</li>
+      <li><strong>PENTING:</strong> Ubah teks yang ada di dalam kurung siku <code>[ ... ]</code> dengan data diri Anda.</li>
+    </ol>
+  </div>
+
+  
+  <article class="letter-card" aria-labelledby="judul-sr_01">
+    
+    <div class="lc-meta">
+      <span class="lc-cat">📂 Kategori: Sarana Prasarana</span>
+    </div>
+
+    <h2 id="judul-sr_01" class="lc-title">Permohonan Pemasangan Bidang Miring (Ramp)</h2>
+    <p class="lc-desc">
+      <strong>Kegunaan:</strong> Gunakan surat ini untuk meminta aksesibilitas fisik bagi pengguna kursi roda atau kruk.
+    </p>
+
+    <div class="letter-content" id="text-sr_01" role="textbox" aria-readonly="true" tabindex="0" aria-label="Pratinjau isi surat">
+Yth. [Kepala Biro Umum / Bagian Rumah Tangga]
+[Nama Instansi Anda]
+di Tempat
+
+Perihal: Permohonan Penyediaan Aksesibilitas Bidang Miring (Ramp)
+
+Dengan hormat,
+
+Saya yang bertanda tangan di bawah ini:
+Nama : [Nama Lengkap Anda]
+NIP  : [NIP Anda]
+Jabatan : [Jabatan Anda]
+Unit Kerja : [Unit Kerja Anda]
+
+Melalui surat ini, saya bermaksud mengajukan permohonan penyediaan fasilitas aksesibilitas berupa bidang miring (ramp) di area [Sebutkan Lokasi, misal: Pintu Masuk Gedung A].
+
+Permohonan ini saya ajukan untuk menunjang kelancaran mobilitas kerja dan produktivitas, serta sebagai bentuk pemenuhan amanat Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas (Pasal 18 tentang Hak Aksesibilitas) dan Peraturan Menteri PUPR Nomor 14/PRT/M/2017 tentang Persyaratan Kemudahan Bangunan Gedung.
+
+Besar harapan saya agar permohonan ini dapat dipertimbangkan demi terwujudnya lingkungan kerja yang inklusif di instansi kita. Atas perhatian Bapak/Ibu, saya ucapkan terima kasih.
+
+Hormat saya,
+
+[Nama Lengkap Anda]
+
+    </div>
+
+    <div class="btn-action-row">
+      <button class="btn-copy" onclick="copyText('text-sr_01', 'Permohonan Pemasangan Bidang Miring (Ramp)')">
+        <span aria-hidden="true">📋</span> Salin Naskah Surat
+      </button>
+    </div>
+
+  </article>
+  
+  <article class="letter-card" aria-labelledby="judul-sr_02">
+    
+    <div class="lc-meta">
+      <span class="lc-cat">📂 Kategori: Teknologi Bantu</span>
+    </div>
+
+    <h2 id="judul-sr_02" class="lc-title">Permohonan Software Pembaca Layar (Screen Reader)</h2>
+    <p class="lc-desc">
+      <strong>Kegunaan:</strong> Untuk ASN Tunanetra yang membutuhkan lisensi JAWS atau NVDA di komputer kantor.
+    </p>
+
+    <div class="letter-content" id="text-sr_02" role="textbox" aria-readonly="true" tabindex="0" aria-label="Pratinjau isi surat">
+Yth. [Kepala Pusdatin / Bagian IT / Pejabat Pengadaan]
+[Nama Instansi Anda]
+di Tempat
+
+Perihal: Permohonan Fasilitas Perangkat Lunak Pembaca Layar (Screen Reader)
+
+Dengan hormat,
+
+Sehubungan dengan tugas dan fungsi saya sebagai [Sebutkan Jabatan] di unit [Sebutkan Unit], bersama ini saya mengajukan permohonan instalasi perangkat lunak pembaca layar (Screen Reader) pada komputer inventaris kantor yang saya gunakan.
+
+Sebagai ASN penyandang disabilitas netra, perangkat lunak ini merupakan "Akomodasi Yang Layak" yang sangat vital untuk memungkinkan saya membaca dokumen dinas, mengakses aplikasi kepegawaian, dan bekerja secara mandiri setara dengan pegawai lainnya.
+
+Hal ini selaras dengan PP Nomor 39 Tahun 2020 tentang Akomodasi yang Layak bagi Penyandang Disabilitas dalam Proses Peradilan (sebagai rujukan) dan UU No. 8 Tahun 2016.
+
+Demikian permohonan ini saya sampaikan. Atas dukungan Bapak/Ibu terhadap kinerja saya, saya ucapkan terima kasih.
+
+Hormat saya,
+
+[Nama Lengkap Anda]
+
+    </div>
+
+    <div class="btn-action-row">
+      <button class="btn-copy" onclick="copyText('text-sr_02', 'Permohonan Software Pembaca Layar (Screen Reader)')">
+        <span aria-hidden="true">📋</span> Salin Naskah Surat
+      </button>
+    </div>
+
+  </article>
+  
+  <article class="letter-card" aria-labelledby="judul-sr_03">
+    
+    <div class="lc-meta">
+      <span class="lc-cat">📂 Kategori: Kepegawaian</span>
+    </div>
+
+    <h2 id="judul-sr_03" class="lc-title">Permohonan Izin Berobat Rutin (Terapi)</h2>
+    <p class="lc-desc">
+      <strong>Kegunaan:</strong> Surat izin resmi untuk atasan bagi yang perlu terapi rutin mingguan/bulanan.
+    </p>
+
+    <div class="letter-content" id="text-sr_03" role="textbox" aria-readonly="true" tabindex="0" aria-label="Pratinjau isi surat">
+Yth. [Nama Atasan Langsung]
+[Jabatan Atasan]
+di Tempat
+
+Perihal: Permohonan Izin Meninggalkan Tugas untuk Pengobatan Rutin
+
+Dengan hormat,
+
+Saya yang bertanda tangan di bawah ini:
+Nama : [Nama Lengkap Anda]
+NIP  : [NIP Anda]
+
+Memohon izin untuk meninggalkan kantor pada:
+Hari/Jam : [Sebutkan Hari, misal: Setiap Selasa, Pukul 13.00 - 15.00]
+Keperluan : Menjalani terapi kesehatan/rehabilitasi medik rutin di [Nama Rumah Sakit].
+
+Pengobatan ini diperlukan untuk menjaga kondisi kesehatan saya agar tetap prima dalam menjalankan tugas sehari-hari. Saya bersedia mengganti jam kerja tersebut di waktu lain atau menyelesaikan target kinerja sesuai tenggat waktu yang ditentukan.
+
+Demikian permohonan ini saya ajukan. Atas kebijaksanaan dan izin Bapak/Ibu, saya ucapkan terima kasih.
+
+Hormat saya,
+
+[Nama Lengkap Anda]
+
+    </div>
+
+    <div class="btn-action-row">
+      <button class="btn-copy" onclick="copyText('text-sr_03', 'Permohonan Izin Berobat Rutin (Terapi)')">
+        <span aria-hidden="true">📋</span> Salin Naskah Surat
+      </button>
+    </div>
+
+  </article>
+  
+
+  <section class="faq-section" aria-labelledby="faq-header">
+    <h2 id="faq-header" style="text-align: center; margin-bottom: 30px;">Pertanyaan Umum (FAQ)</h2>
+    
+    <details class="faq-item">
+      <summary>Mengapa saya harus menggunakan surat resmi?</summary>
+      <div>
+        Dalam birokrasi pemerintahan, "Lisan" seringkali tidak dianggap. Surat resmi menjadi <strong>bukti tertulis</strong> (arsip) bahwa Anda pernah mengajukan permintaan. Jika di kemudian hari ada sengketa atau audit, surat ini menjadi pelindung hukum Anda.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Apakah saya boleh mengubah isi surat ini?</summary>
+      <div>
+        <strong>Sangat boleh.</strong> Template ini hanyalah kerangka dasar. Silakan sesuaikan kalimatnya dengan gaya bahasa di instansi Anda, atau tambahkan dasar hukum lain yang relevan. Jangan lupa mengisi bagian [Nama], [NIP], dan [Instansi].
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Bagaimana jika atasan menolak permohonan saya?</summary>
+      <div>
+        Jika ditolak secara lisan, mintalah <strong>jawaban tertulis</strong> alasan penolakannya. Jika penolakan tidak berdasar, Anda dapat meneruskan surat tersebut ke unit Advokasi Forum ASN Inklusif atau KASN (Komisi Aparatur Sipil Negara) sebagai bukti adanya hambatan akomodasi yang layak.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Apa dasar hukum yang dipakai di template ini?</summary>
+      <div>
+        Template ini merujuk pada <strong>UU No. 8 Tahun 2016</strong> tentang Penyandang Disabilitas, khususnya pasal mengenai hak pekerjaan dan aksesibilitas, serta peraturan turunan seperti PP No. 39 Tahun 2020. Mencantumkan dasar hukum membuat posisi tawar Anda lebih kuat.
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+
+<script>
+function copyText(elementId, suratTitle) {
+  // 1. Ambil teks (hapus spasi berlebih di awal/akhir)
+  const textElement = document.getElementById(elementId);
+  const textToCopy = textElement.innerText.trim();
+  const announcer = document.getElementById('a11y-announcer');
+
+  // 2. Salin ke Clipboard
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    
+    // 3. Notifikasi Suara (Screen Reader)
+    // Teks ini akan langsung dibacakan oleh pembaca layar
+    announcer.textContent = "Berhasil menyalin naskah: " + suratTitle + ". Silakan tempel di dokumen Anda.";
+
+    // 4. Notifikasi Visual (Alert Sederhana)
+    // Kita pakai alert standar agar fokus pindah dan user sadar
+    // Atau bisa pakai toast custom, tapi alert paling reliable di berbagai browser
+    alert("✅ Naskah berhasil disalin!\n\nSilakan 'Paste' (Tempel) di Microsoft Word/Email.");
+
+    // Reset announcer setelah beberapa detik agar bisa dipakai lagi
+    setTimeout(() => { announcer.textContent = ""; }, 3000);
+
+  }).catch(err => {
+    console.error('Gagal:', err);
+    alert('Gagal menyalin otomatis. Silakan blok teks dan salin manual.');
+  });
+}
+</script>
+
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 <strong>Forum ASN Inklusif</strong>. All Rights Reserved.</p>
+            
+            <div style="font-size: 0.85em; margin-bottom: 15px;">
+                <a href="/privacy/" style="color: #ccc; text-decoration: none;">Privacy Policy</a> • 
+                <a href="/accessibility/" style="color: #ccc; text-decoration: none;">Aksesibilitas</a> • 
+                <a href="/kampanye/" style="color: #ffeb3b; text-decoration: none; font-weight: bold;">Kampanye & Twibbon</a>
+            </div>
+
+            <p class="eng-name" style="font-style: italic; margin-bottom: 20px;">Indonesian Inclusive Civil Servants Association</p>
+            
+            <div class="footer-links" style="margin-bottom: 25px;">
+                <a href="mailto:contact@asninklusif.or.id" aria-label="Kirim Email ke Kami">📩 contact@asninklusif.or.id</a> | 
+                <a href="https://instagram.com/asninklusif.id" target="_blank" rel="noopener">📸 @asninklusif.id</a>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px auto; width: 80%;">
+
+            <div style="font-size: 0.85rem; opacity: 0.9; line-height: 1.6;">
+                <p style="margin: 5px 0;">
+                    Website ini dikembangkan dengan standar aksesibilitas <strong>WCAG 2.1 Level AA</strong>.
+                </p>
+                <p style="margin: 5px 0;">
+                    Accessibility Audit & Tech Partner: 
+                    <a href="https://disabilitas.com" target="_blank" rel="noopener" style="color: #4db8ff; font-weight: bold; text-decoration: none;">Disabilitas.com</a> 
+                    & 
+                    <a href="https://dimaster.co.id" target="_blank" rel="noopener" style="color: #4db8ff; font-weight: bold; text-decoration: none;">Dimaster Group</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+/* ==========================================================================
+   FORUM ASN INKLUSIF - MAIN STYLESHEET (INTEGRATED)
+   Standard: WCAG 2.1 AA | Features: Dark Mode, Text Resizer, Sticky Nav
+   ========================================================================== */
+
+/* 1. CSS VARIABLES (THEME CONFIG) */
+:root {
+    /* --- LIGHT MODE (DEFAULT - BIRU ASN) --- */
+    --header-bg: #002b5c;        /* Navy Blue Gelap */
+    --header-text: #ffffff;      /* Teks Putih */
+    --primary-color: #002b5c;    /* Judul Utama */
+    --accent-color: #007acc;     /* Link & Tombol (Biru Terang) */
+    --highlight: #00b4d8;        /* Cyan - Aksen Modern */
+    --bg-color: #ffffff;         /* Background Putih */
+    --text-color: #222222;       /* Teks Hitam Pekat (Kontras Tinggi) */
+    --card-bg: #f8f9fa;          /* Background Kartu (Abu sangat muda) */
+    --border-color: #dde1e6;     /* Garis Batas */
+    --button-text: #ffffff;      
+    --focus-ring: #ff9900;       /* Fokus Oranye (Sangat terlihat) */
+}
+
+[data-theme="dark"] {
+    /* --- DARK MODE (HIGH CONTRAST) --- */
+    --header-bg: #000000;        /* Hitam Total */
+    --header-text: #ffffff;
+    --primary-color: #ffffff;    /* Judul Putih */
+    --accent-color: #4db8ff;     /* Cyan Terang (Agar terbaca di hitam) */
+    --highlight: #ffd700;        /* Kuning Emas (Highlight Dark Mode) */
+    --bg-color: #121212;         /* Abu Gelap (Mencegah mata lelah) */
+    --text-color: #e0e0e0;       /* Teks Putih Gading */
+    --card-bg: #1e1e1e;          
+    --border-color: #333333;
+    --button-text: #000000;      /* Teks tombol hitam agar kontras dgn Cyan */
+}
+
+/* 2. BASE STYLES & TYPOGRAPHY */
+* { box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 100%; /* Basis untuk Text Resizer */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Aksesibilitas Link & Fokus */
+a { color: var(--accent-color); text-decoration: none; transition: color 0.2s; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+a:focus, button:focus { 
+    outline: 3px solid var(--focus-ring); 
+    outline-offset: 2px; 
+    border-radius: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--primary-color); margin-top: 1.5em; margin-bottom: 0.5em; }
+
+/* Skip Link (Hidden until focused) */
+.skip-link {
+    position: absolute;
+    top: -50px; left: 0;
+    background: var(--focus-ring);
+    color: #000;
+    padding: 12px 20px;
+    z-index: 9999;
+    font-weight: bold;
+    transition: top 0.2s;
+    text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* 3. HEADER & NAV (STICKY MODERN) */
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px 0;
+    border-bottom: 4px solid var(--accent-color);
+    position: sticky; /* Menu nempel saat scroll */
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.brand-wrapper { display: flex; align-items: center; gap: 15px; }
+.brand-wrapper img {
+    background: white; /* Kotak putih di belakang logo agar selalu kontras */
+    padding: 4px;
+    border-radius: 50%;
+    width: 55px; height: 55px; object-fit: contain;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.brand-title h1 { margin: 0; font-size: 1.2rem; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+.brand-subtitle { display: block; font-size: 0.85rem; opacity: 0.9; color: #ddd; font-weight: normal; }
+
+/* Menu Navigasi */
+.nav-controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    flex-wrap: wrap;
+}
+
+#nav-menu {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; gap: 20px;
+}
+#nav-menu a { color: #fff; font-weight: 500; font-size: 0.95rem; opacity: 0.9; }
+#nav-menu a:hover, #nav-menu a.active { 
+    color: #ffeb3b; /* Kuning Emas */
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 2px solid #ffeb3b;
+}
+
+/* Tombol Tools (A+, Dark Mode, Lang) */
+.nav-controls button {
+    background: transparent; 
+    border: 1px solid rgba(255,255,255,0.4); 
+    color: #fff;
+    padding: 4px 10px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold;
+    font-size: 0.9em;
+    min-width: 35px;
+}
+.nav-controls button:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+/* 4. CONTENT COMPONENTS */
+.hero {
+    text-align: center; 
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 122, 204, 0.05) 100%);
+    border-radius: 12px; margin-bottom: 3rem; margin-top: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.button-cta {
+    display: inline-block; 
+    background: var(--accent-color);
+    color: var(--button-text); 
+    padding: 12px 28px;
+    border-radius: 50px; 
+    font-weight: bold; 
+    margin-top: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.button-cta:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Card Berita */
+#berita ul li, .grid-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+#berita ul li:hover { transform: translateY(-2px); border-color: var(--accent-color); }
+
+/* Images & Caption */
+img { max-width: 100%; height: auto; }
+figcaption { text-align: center; font-style: italic; font-size: 0.9em; opacity: 0.8; margin-top: 5px; }
+
+/* 5. FOOTER */
+footer {
+    background: var(--header-bg); 
+    color: #fff;
+    padding: 3rem 0; margin-top: 5rem; 
+    text-align: center;
+    border-top: 4px solid var(--accent-color);
+}
+footer a { color: #4db8ff; font-weight: bold; }
+footer hr { opacity: 0.2; }
+
+/* 6. UTILITY */
+.visually-hidden { display: none !important; }
+
+/* Responsive HP */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; align-items: flex-start; }
+    .nav-controls { width: 100%; justify-content: space-between; margin-top: 15px; flex-wrap: wrap; }
+    #nav-menu { gap: 15px; font-size: 0.9em; flex-wrap: wrap; width: 100%; margin-bottom: 10px; }
+    .brand-wrapper { width: 100%; }
+}
