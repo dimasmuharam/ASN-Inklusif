@@ -6,7 +6,7 @@ categories: [Berita, Kegiatan]
 tags: [Beasiswa, LPDP, Pendidikan Tinggi, ASN Inklusif]
 author: Humas
 image:
-  path: /assets/img/webinar-lpdp-2026.jpg
+  path: /assets/img/webinar-lpdp-2026.jpeg
   alt: "Poster Webinar Nasional Forum ASN Inklusif mengenai Beasiswa LPDP untuk disabilitas yang dihadiri ratusan peserta daring"
 ---
 **JAKARTA, 7 Februari 2026** – Forum ASN Inklusif berkolaborasi dengan Komunitas Perencana Kementerian Keuangan (Komplemenkeu) dan Forum Alumni Disabilitas (FORADIS) LPDP sukses menyelenggarakan webinar nasional bertajuk **"Beasiswa LPDP untuk Disabilitas: Akses, Persiapan, dan Peluang"**.
